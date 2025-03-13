@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookHavenClassLibrary.Interfaces
 {
-    public interface ILoginRepository
+    public interface IUserRepository
     {
         UserResponseDto? Login(LoginRequestDto loginRequest);
         UserResponseDto? Register(RegistrationRequestDto registrationRequest);

@@ -1,4 +1,9 @@
-﻿using BookHavenClassLibrary.Dtos.User;
+﻿using BookHavenClassLibrary.Connections;
+using BookHavenClassLibrary.Dtos.User;
+using BookHavenClassLibrary.Enumz;
+using BookHavenClassLibrary.Interfaces;
+using BookHavenClassLibrary.Mappers;
+using BookHavenClassLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace BookHavenClassLibrary.Repositories
 {
-    class LoginRepository
+    public class UserRepository: IUserRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly AppDbContext _context;
 
-        public AuthService(ApplicationDbContext context)
+        public UserRepository(AppDbContext context)
         {
             _context = context;
         }
@@ -85,5 +90,61 @@ namespace BookHavenClassLibrary.Repositories
 
             return UserMapper.MapToUserResponseDto(user);
         }
+
+        public void SeedUsers()
+        {
+            if (!_context.Users.Any()) // Ensure we only seed if the database is empty
+            {
+                var users = new List<User>
+        {
+            new User
+            {
+                FirstName = "Admin",
+                LastName = "User",
+                Email = "admin@bookhaven.com",
+                Role = UserRoleType.Admin,
+                CreatedAt = DateTime.Now,
+                LastLoginAt = DateTime.Now
+            },
+            new User
+            {
+                FirstName = "John",
+                LastName = "Sales 001",
+                Email = "sales001@bookhaven.com",
+                Role = UserRoleType.Sales,
+                CreatedAt = DateTime.Now,
+                LastLoginAt = DateTime.Now
+            },
+            new User
+            {
+                FirstName = "John",
+                LastName = "Clerk 001",
+                Email = "clerk001@bookhaven.com",
+                Role = UserRoleType.Clerk,
+                CreatedAt = DateTime.Now,
+                LastLoginAt = DateTime.Now
+            }
+        };
+
+                foreach (var user in users)
+                {
+                    string salt = GenerateSalt();
+                    string passwordHash = ComputeHash("test123!", salt);
+
+                    user.Salt = salt;
+                    user.PasswordHash = passwordHash;
+
+                    _context.Users.Add(user);
+                }
+
+                _context.SaveChanges();
+                Console.WriteLine("✅ Users seeded successfully.");
+            }
+            else
+            {
+                Console.WriteLine("ℹ️ Users already exist in the database. No seeding performed.");
+            }
+        }
+
     }
 }

@@ -1,8 +1,11 @@
-using BookHavenClassLibrary.Connections;
+﻿using BookHavenClassLibrary.Connections;
+using BookHavenClassLibrary.Interfaces;
+using BookHavenClassLibrary.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Configuration;
 
 namespace BookHavenWinFormUi
 {
@@ -35,24 +38,44 @@ namespace BookHavenWinFormUi
 
 
                     //EF Core
-                    services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
-                        Environment.GetEnvironmentVariable("DefaultConnection") ?? 
-                        context.Configuration.GetConnectionString("DefaultConnection"))
-                    );
-                
-                      
+                    string connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
+                          ?? context.Configuration.GetConnectionString("DefaultConnection");
+
+
+
+                    if (string.IsNullOrEmpty(connectionString))
+                    {
+                        throw new InvalidOperationException("DefaultConnection is missing from appsettings.json");
+                    }
+
+                    services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+                   
+
 
                     //Register Repositories
                     //services.AddSingleton<IRepository, Repository>();
-                    //services.AddScoped<IRepository, Repository>();
+                    services.AddScoped<IUserRepository, UserRepository>();
 
 
                     //Register Forms
                     services.AddTransient<LoginForm>();
                 }).Build();
 
-            var loginForm = host.Services.GetRequiredService<LoginForm>();
-            Application.Run(loginForm);
+            
+
+            using var scope = host.Services.CreateScope();
+            var services = scope.ServiceProvider;
+
+            try
+            {
+                var loginForm = services.GetRequiredService<LoginForm>();
+                Application.Run(loginForm);
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+           
         }
     }
 }
