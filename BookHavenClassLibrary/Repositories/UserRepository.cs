@@ -4,6 +4,7 @@ using BookHavenClassLibrary.Enumz;
 using BookHavenClassLibrary.Interfaces;
 using BookHavenClassLibrary.Mappers;
 using BookHavenClassLibrary.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +46,9 @@ namespace BookHavenClassLibrary.Repositories
             return Convert.ToBase64String(saltBytes);
         }
 
-        public UserResponseDto? Login(LoginRequestDto loginRequest)
+        public async Task<UserResponseDto?> Login(LoginRequestDto loginRequest)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Email == loginRequest.Email);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
             if (user == null)
                 return null;
 

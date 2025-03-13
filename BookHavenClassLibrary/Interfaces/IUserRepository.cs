@@ -9,7 +9,7 @@ namespace BookHavenClassLibrary.Interfaces
 {
     public interface IUserRepository
     {
-        UserResponseDto? Login(LoginRequestDto loginRequest);
+        Task<UserResponseDto?> Login(LoginRequestDto loginRequest);
         UserResponseDto? Register(RegistrationRequestDto registrationRequest);
     }
 }

@@ -38,7 +38,7 @@ namespace BookHavenWinFormUi
 
 
                     //EF Core
-                    string connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
+                    string? connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
                           ?? context.Configuration.GetConnectionString("DefaultConnection");
 
 
