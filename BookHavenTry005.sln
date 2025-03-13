@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookHavenWinFormUi", "BookHavenWinFormUi\BookHavenWinFormUi.csproj", "{2CA1D2D0-3B0D-4BF5-8344-30BC064BFD4B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5051C777-8649-462F-968D-C65B3A7A2381} = {5051C777-8649-462F-968D-C65B3A7A2381}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookHavenClassLibrary", "BookHavenClassLibrary\BookHavenClassLibrary.csproj", "{5051C777-8649-462F-968D-C65B3A7A2381}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2CA1D2D0-3B0D-4BF5-8344-30BC064BFD4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA1D2D0-3B0D-4BF5-8344-30BC064BFD4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA1D2D0-3B0D-4BF5-8344-30BC064BFD4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA1D2D0-3B0D-4BF5-8344-30BC064BFD4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5051C777-8649-462F-968D-C65B3A7A2381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5051C777-8649-462F-968D-C65B3A7A2381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5051C777-8649-462F-968D-C65B3A7A2381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5051C777-8649-462F-968D-C65B3A7A2381}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D01310F4-F593-4769-85C2-782F975E90BB}
+	EndGlobalSection
+EndGlobal
