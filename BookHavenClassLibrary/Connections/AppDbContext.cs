@@ -1,4 +1,5 @@
 ﻿using BookHavenClassLibrary.Enumz;
+using BookHavenClassLibrary.Migrations;
 using BookHavenClassLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,10 @@ namespace BookHavenClassLibrary.Connections
         //Add my entity models here
         public DbSet<User> Users { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<SupplierOrder> SupplierOrders { get; set; }
+        public DbSet<SupplierOrderItem> SupplierOrderItems { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
