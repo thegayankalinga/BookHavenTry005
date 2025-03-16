@@ -19,7 +19,7 @@ namespace BookHavenWinFormUi
         {
             if (ValidationService.IsValidText(userEmail) == false)
             {
-                MessageBox.Show("Email field cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "Email field cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 userEmail.Focus();
                 return;
             }
@@ -30,7 +30,7 @@ namespace BookHavenWinFormUi
 
             if (ValidationService.IsValidText(userPassword) == false)
             {
-                MessageBox.Show("Password field cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "Password field cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 userPassword.Focus();
                 return;
             }
@@ -45,11 +45,21 @@ namespace BookHavenWinFormUi
 
             if (userResponseDto != null)
             {
-                //gotomain form
-                MessageBox.Show("Login Successful");
+
+                // Store user details in session
+                UserSession.SetUser(userResponseDto.Id, userResponseDto.Email, userResponseDto.FullName, userResponseDto.Role);
+
+                //TODO: gotomain form
+                MainForm mainForm = new MainForm();
+                this.Hide();
+                mainForm.ShowDialog();
+                this.Close();
+
+              
+                //MessageBox.Show(this, "Login Successful");
             }
             else {
-               MessageBox.Show($"Invalid User, Please use correct login information");
+               MessageBox.Show(this, $"Invalid User, Please use correct login information");
             }
         }
            

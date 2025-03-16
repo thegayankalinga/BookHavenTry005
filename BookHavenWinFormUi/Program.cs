@@ -1,6 +1,7 @@
 ﻿using BookHavenClassLibrary.Connections;
 using BookHavenClassLibrary.Interfaces;
 using BookHavenClassLibrary.Repositories;
+using BookHavenWinFormUi.Utilz;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ namespace BookHavenWinFormUi
 {
     internal static class Program
     {
+        public static IHost Host { get; private set; } = null!;
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -20,8 +22,8 @@ namespace BookHavenWinFormUi
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-
-            var host = Host.CreateDefaultBuilder()
+            Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
+            //var host = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration((context, config) =>
                 {
                     config.SetBasePath(Directory.GetCurrentDirectory());
@@ -49,21 +51,28 @@ namespace BookHavenWinFormUi
                     }
 
                     services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
-                   
+
 
 
                     //Register Repositories
                     //services.AddSingleton<IRepository, Repository>();
+                    
+
+
                     services.AddScoped<IUserRepository, UserRepository>();
 
 
                     //Register Forms
                     services.AddTransient<LoginForm>();
+                    services.AddTransient<MainForm>();
+
+                    services.AddSingleton<NavigationService>();
+
                 }).Build();
 
             
 
-            using var scope = host.Services.CreateScope();
+            using var scope = Host.Services.CreateScope();
             var services = scope.ServiceProvider;
 
             try
