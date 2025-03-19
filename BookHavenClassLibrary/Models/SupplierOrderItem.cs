@@ -8,14 +8,19 @@ using System.Threading.Tasks;
 
 namespace BookHavenClassLibrary.Models
 {
+
+    //One to Many relationship (many side of the relationship)
     public class SupplierOrderItem
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderItemId { get; set; }
 
-        [Required]
-        public int SupplierOrderId { get; set; }
+    
+        public int? SupplierOrderId { get; set; }
+
+        //Navigation Property
+        public SupplierOrder? SupplierOrder { get; set; }
 
         [Required]
         public int BookId { get; set; }
@@ -24,6 +29,6 @@ namespace BookHavenClassLibrary.Models
         public int Quantity { get; set; }
 
         [Required]
-        public int UnitPriced { get; set; }
+        public decimal UnitPrice { get; set; }
     }
 }

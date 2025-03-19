@@ -1,5 +1,4 @@
 ﻿using BookHavenClassLibrary.Enumz;
-using BookHavenClassLibrary.Migrations;
 using BookHavenClassLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +23,8 @@ namespace BookHavenClassLibrary.Connections
         public DbSet<SupplierOrder> SupplierOrders { get; set; }
         public DbSet<SupplierOrderItem> SupplierOrderItems { get; set; }
 
+        //dotnet ef migrations add InitialCreate
+        //dotnet ef database update
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

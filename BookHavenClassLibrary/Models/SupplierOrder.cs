@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookHavenClassLibrary.Migrations
+namespace BookHavenClassLibrary.Models
 {
     public class SupplierOrder
     {
+        //One to many relationship one side of the relationship
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SupplierOrderId { get; set; }
@@ -23,5 +25,7 @@ namespace BookHavenClassLibrary.Migrations
 
         [Required]
         public required OrderStatuses OrderStatuses { get; set; }
+
+        public List<SupplierOrderItem> SupplierOrderItems { get; set; } = new List<SupplierOrderItem>();
     }
 }

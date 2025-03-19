@@ -35,8 +35,8 @@
             iconButton6 = new FontAwesome.Sharp.IconButton();
             iconButton5 = new FontAwesome.Sharp.IconButton();
             iconButton4 = new FontAwesome.Sharp.IconButton();
-            iconButton3 = new FontAwesome.Sharp.IconButton();
-            iconButton2 = new FontAwesome.Sharp.IconButton();
+            btnBooks = new FontAwesome.Sharp.IconButton();
+            btnSupplier = new FontAwesome.Sharp.IconButton();
             btnDashboard = new FontAwesome.Sharp.IconButton();
             panelLogo = new Panel();
             pictureBox1 = new PictureBox();
@@ -64,8 +64,8 @@
             panelSideMenu.Controls.Add(iconButton6);
             panelSideMenu.Controls.Add(iconButton5);
             panelSideMenu.Controls.Add(iconButton4);
-            panelSideMenu.Controls.Add(iconButton3);
-            panelSideMenu.Controls.Add(iconButton2);
+            panelSideMenu.Controls.Add(btnBooks);
+            panelSideMenu.Controls.Add(btnSupplier);
             panelSideMenu.Controls.Add(btnDashboard);
             panelSideMenu.Controls.Add(panelLogo);
             panelSideMenu.Dock = DockStyle.Left;
@@ -201,47 +201,48 @@
             iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
             iconButton4.UseVisualStyleBackColor = true;
             // 
-            // iconButton3
+            // btnBooks
             // 
-            iconButton3.Dock = DockStyle.Top;
-            iconButton3.FlatAppearance.BorderSize = 0;
-            iconButton3.FlatStyle = FlatStyle.Flat;
-            iconButton3.ForeColor = Color.Gainsboro;
-            iconButton3.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
-            iconButton3.IconColor = Color.RosyBrown;
-            iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton3.IconSize = 32;
-            iconButton3.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton3.Location = new Point(0, 260);
-            iconButton3.Name = "iconButton3";
-            iconButton3.Padding = new Padding(10, 0, 20, 0);
-            iconButton3.Size = new Size(220, 60);
-            iconButton3.TabIndex = 4;
-            iconButton3.Text = "iconButton3";
-            iconButton3.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton3.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton3.UseVisualStyleBackColor = true;
+            btnBooks.Dock = DockStyle.Top;
+            btnBooks.FlatAppearance.BorderSize = 0;
+            btnBooks.FlatStyle = FlatStyle.Flat;
+            btnBooks.ForeColor = Color.Gainsboro;
+            btnBooks.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
+            btnBooks.IconColor = Color.RosyBrown;
+            btnBooks.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnBooks.IconSize = 32;
+            btnBooks.ImageAlign = ContentAlignment.MiddleLeft;
+            btnBooks.Location = new Point(0, 260);
+            btnBooks.Name = "btnBooks";
+            btnBooks.Padding = new Padding(10, 0, 20, 0);
+            btnBooks.Size = new Size(220, 60);
+            btnBooks.TabIndex = 4;
+            btnBooks.Text = "Books";
+            btnBooks.TextAlign = ContentAlignment.MiddleLeft;
+            btnBooks.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnBooks.UseVisualStyleBackColor = true;
             // 
-            // iconButton2
+            // btnSupplier
             // 
-            iconButton2.Dock = DockStyle.Top;
-            iconButton2.FlatAppearance.BorderSize = 0;
-            iconButton2.FlatStyle = FlatStyle.Flat;
-            iconButton2.ForeColor = Color.Gainsboro;
-            iconButton2.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
-            iconButton2.IconColor = Color.RosyBrown;
-            iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton2.IconSize = 32;
-            iconButton2.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton2.Location = new Point(0, 200);
-            iconButton2.Name = "iconButton2";
-            iconButton2.Padding = new Padding(10, 0, 20, 0);
-            iconButton2.Size = new Size(220, 60);
-            iconButton2.TabIndex = 3;
-            iconButton2.Text = "iconButton2";
-            iconButton2.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton2.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton2.UseVisualStyleBackColor = true;
+            btnSupplier.Dock = DockStyle.Top;
+            btnSupplier.FlatAppearance.BorderSize = 0;
+            btnSupplier.FlatStyle = FlatStyle.Flat;
+            btnSupplier.ForeColor = Color.Gainsboro;
+            btnSupplier.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
+            btnSupplier.IconColor = Color.RosyBrown;
+            btnSupplier.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSupplier.IconSize = 32;
+            btnSupplier.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSupplier.Location = new Point(0, 200);
+            btnSupplier.Name = "btnSupplier";
+            btnSupplier.Padding = new Padding(10, 0, 20, 0);
+            btnSupplier.Size = new Size(220, 60);
+            btnSupplier.TabIndex = 3;
+            btnSupplier.Text = "Supplier";
+            btnSupplier.TextAlign = ContentAlignment.MiddleLeft;
+            btnSupplier.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnSupplier.UseVisualStyleBackColor = true;
+            btnSupplier.Click += btnSupplier_Click;
             // 
             // btnDashboard
             // 
@@ -293,7 +294,7 @@
             panelTitleBar.Dock = DockStyle.Top;
             panelTitleBar.Location = new Point(220, 0);
             panelTitleBar.Name = "panelTitleBar";
-            panelTitleBar.Size = new Size(964, 70);
+            panelTitleBar.Size = new Size(1204, 70);
             panelTitleBar.TabIndex = 1;
             panelTitleBar.MouseDown += panelTitleBar_MouseDown;
             // 
@@ -327,7 +328,7 @@
             panelShadow.Dock = DockStyle.Top;
             panelShadow.Location = new Point(220, 70);
             panelShadow.Name = "panelShadow";
-            panelShadow.Size = new Size(964, 8);
+            panelShadow.Size = new Size(1204, 8);
             panelShadow.TabIndex = 2;
             // 
             // panelDesktop
@@ -336,7 +337,7 @@
             panelDesktop.Dock = DockStyle.Fill;
             panelDesktop.Location = new Point(220, 78);
             panelDesktop.Name = "panelDesktop";
-            panelDesktop.Size = new Size(964, 651);
+            panelDesktop.Size = new Size(1204, 651);
             panelDesktop.TabIndex = 3;
             // 
             // pictureBox2
@@ -344,7 +345,7 @@
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.BackgroundImageLayout = ImageLayout.None;
             pictureBox2.Image = Properties.Resources.cropped_final_image;
-            pictureBox2.Location = new Point(281, 170);
+            pictureBox2.Location = new Point(401, 170);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(389, 288);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -356,7 +357,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
-            ClientSize = new Size(1184, 729);
+            ClientSize = new Size(1424, 729);
             Controls.Add(panelDesktop);
             Controls.Add(panelShadow);
             Controls.Add(panelTitleBar);
@@ -387,8 +388,8 @@
         private FontAwesome.Sharp.IconButton iconButton6;
         private FontAwesome.Sharp.IconButton iconButton5;
         private FontAwesome.Sharp.IconButton iconButton4;
-        private FontAwesome.Sharp.IconButton iconButton3;
-        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton btnBooks;
+        private FontAwesome.Sharp.IconButton btnSupplier;
         private PictureBox pictureBox1;
         private Panel panelTitleBar;
         private FontAwesome.Sharp.IconPictureBox iconCurrentChildForm;

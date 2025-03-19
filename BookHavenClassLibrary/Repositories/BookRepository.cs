@@ -20,6 +20,10 @@ namespace BookHavenClassLibrary.Repositories
             _appDbContext = context;
         }
 
+        public async Task<bool> BookExist(int bookId)
+        {
+            return await _appDbContext.Books.AnyAsync(b => b.BookId == bookId);
+        }
         public async Task<bool> AddBookAsync(BookRequestDto bookRequestDto)
         {
             var book = BookMapper.MapToBook(bookRequestDto);

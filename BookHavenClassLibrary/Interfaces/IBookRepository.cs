@@ -14,5 +14,7 @@ namespace BookHavenClassLibrary.Interfaces
         Task<BookResponseDto?> GetBookByIdAsync(int bookId);
         Task<bool> UpdateBookAsync(int bookId, BookRequestDto bookRequestDto);
         Task<bool> DeleteBookAsync(int bookId);
+
+        Task<bool> BookExist(int bookId);
     }
 }

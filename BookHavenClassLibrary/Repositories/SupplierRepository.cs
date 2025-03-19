@@ -20,6 +20,10 @@ namespace BookHavenClassLibrary.Repositories
             _appDbContext = context;
         }
 
+        public async Task<bool> SupplierExist(int supplierId)
+        {
+            return await _appDbContext.Suppliers.AnyAsync(s => s.SupplierId == supplierId);
+        }
         public async Task<bool> AddSupplierAsync(SupplierRequestDto supplierRequestDto)
         {
             var supplier = SupplierMapper.MaptoSupplier(supplierRequestDto);

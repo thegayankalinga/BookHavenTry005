@@ -1,6 +1,7 @@
 ﻿using BookHavenClassLibrary.Connections;
 using BookHavenClassLibrary.Interfaces;
 using BookHavenClassLibrary.Repositories;
+using BookHavenWinFormUi.PanelForms;
 using BookHavenWinFormUi.Utilz;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -62,11 +63,13 @@ namespace BookHavenWinFormUi
                     services.AddScoped<IUserRepository, UserRepository>();
                     services.AddScoped<ISupplierRepository, SupplierRepository>();
                     services.AddScoped<IBookRepository, BookRepository>();
+                    services.AddScoped<ISupplierOrderRepository, SupplierOrderRepository>();
 
 
                     //Register Forms
                     services.AddTransient<LoginForm>();
                     services.AddTransient<MainForm>();
+                    services.AddTransient<SupplierForm>();
 
                     services.AddSingleton<NavigationService>();
 

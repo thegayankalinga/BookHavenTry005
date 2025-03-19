@@ -1,18 +1,27 @@
 using BookHavenClassLibrary.Dtos.User;
 using BookHavenClassLibrary.Interfaces;
 using BookHavenClassLibrary.Repositories;
+using BookHavenWinFormUi.PanelForms;
 using BookHavenWinFormUi.Utilz;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BookHavenWinFormUi
 {
     public partial class LoginForm : Form
     {
         private readonly IUserRepository _userRepository;
-        public LoginForm(IUserRepository userRepository)
+        private readonly IServiceProvider _serviceProvider;
+        public LoginForm(IUserRepository userRepository, IServiceProvider serviceProvider)
         {
+
+            _serviceProvider = serviceProvider;
             _userRepository = userRepository;
             InitializeComponent();
-             
+
+            //TODO: remove for production
+            userEmail.Text = "admin@bookhaven.com";
+            userPassword.Text = "test123";
+            _serviceProvider = serviceProvider;
         }
 
         private async void loginButton_Click(object sender, EventArgs e)
@@ -50,7 +59,7 @@ namespace BookHavenWinFormUi
                 UserSession.SetUser(userResponseDto.Id, userResponseDto.Email, userResponseDto.FullName, userResponseDto.Role);
 
                 //TODO: gotomain form
-                MainForm mainForm = new MainForm();
+                MainForm mainForm = _serviceProvider.GetRequiredService<MainForm>();
                 this.Hide();
                 mainForm.ShowDialog();
                 this.Close();

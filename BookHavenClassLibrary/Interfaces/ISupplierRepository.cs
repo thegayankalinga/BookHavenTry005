@@ -17,5 +17,7 @@ namespace BookHavenClassLibrary.Interfaces
         Task<bool> UpdateSupplierAsync(int supplierId, SupplierRequestDto supplierRequestDto);
 
         Task<bool> DeleteSupplierAsync(int supplierId);
+
+        Task<bool> SupplierExist(int supplierId);
     }
 }

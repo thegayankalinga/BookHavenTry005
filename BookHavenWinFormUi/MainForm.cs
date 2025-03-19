@@ -1,4 +1,5 @@
-﻿using BookHavenWinFormUi.Utilz;
+﻿using BookHavenWinFormUi.PanelForms;
+using BookHavenWinFormUi.Utilz;
 using FontAwesome.Sharp;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,15 +17,17 @@ using System.Windows.Forms;
 namespace BookHavenWinFormUi
 {
 
-  
+
 
     public partial class MainForm : Form
     {
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
-        public MainForm()
+        private readonly SupplierForm _supplierForm;
+        public MainForm(SupplierForm supplierForm)
         {
+            _supplierForm = supplierForm;
             InitializeComponent();
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
@@ -110,6 +113,7 @@ namespace BookHavenWinFormUi
             childForm.Dock = DockStyle.Fill;
             panelDesktop.Controls.Add(childForm);
             panelDesktop.Tag = childForm;
+            childForm.BringToFront();
             childForm.Show();
             lblTitleChildForm.Text = childForm.Text;
 
@@ -126,7 +130,11 @@ namespace BookHavenWinFormUi
             //OpenChildForm(new FormDashboard());
         }
 
-
+        private void btnSupplier_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color1);
+            OpenChildForm(_supplierForm);
+        }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -172,6 +180,8 @@ namespace BookHavenWinFormUi
 
             // Close current form
         }
+
+        
 
 
         //TODO: Implement these
