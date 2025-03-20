@@ -10,6 +10,6 @@ namespace BookHavenClassLibrary.Interfaces
     public interface IUserRepository
     {
         Task<UserResponseDto?> Login(LoginRequestDto loginRequest);
-        UserResponseDto? Register(RegistrationRequestDto registrationRequest);
+        Task<UserResponseDto?> Register(RegistrationRequestDto registrationRequest);
     }
 }

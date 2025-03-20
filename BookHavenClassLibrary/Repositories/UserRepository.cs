@@ -41,7 +41,7 @@ namespace BookHavenClassLibrary.Repositories
             return Convert.ToBase64String(saltBytes);
         }
 
-        public async Task<UserResponseDto?> LoginAsync(LoginRequestDto loginRequest)
+        public async Task<UserResponseDto?> Login(LoginRequestDto loginRequest)
         {
             using var dbContext = _contextFactory.CreateDbContext();
             var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email).ConfigureAwait(false);
@@ -60,7 +60,7 @@ namespace BookHavenClassLibrary.Repositories
             return UserMapper.MapToUserResponseDto(user);
         }
 
-        public async Task<UserResponseDto?> RegisterAsync(RegistrationRequestDto registrationRequest)
+        public async Task<UserResponseDto?> Register(RegistrationRequestDto registrationRequest)
         {
             using var dbContext = _contextFactory.CreateDbContext();
             var existingUser = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == registrationRequest.Email).ConfigureAwait(false);

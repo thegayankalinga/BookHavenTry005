@@ -81,32 +81,53 @@ namespace BookHavenWinFormUi.PanelForms
         {
 
 
+            if (gridViewBookList.InvokeRequired)
+            {
+                gridViewBookList.Invoke(new MethodInvoker(async () => await LoadBooksAsync()));
+                return;
+            }
+
             if (gridViewBookList.Columns.Count == 0)
             {
                 ConfigureDataGridView();
             }
 
-
             gridViewBookList.Rows.Clear();
 
-            allBooks = await _bookRepository.GetAllBooksAsync();
+            allBooks = await _bookRepository.GetAllBooksAsync().ConfigureAwait(false);
 
+            // Ensure UI update happens on the main thread
             DisplayAllBooks(allBooks);
 
         }
 
         private void DisplayAllBooks(List<BookResponseDto> booksToDisplay)
         {
+
+            if (gridViewBookList.InvokeRequired)
+            {
+                gridViewBookList.Invoke(new MethodInvoker(() => DisplayAllBooks(booksToDisplay)));
+                return;
+            }
+
+            gridViewBookList.Rows.Clear();
+
             foreach (var book in booksToDisplay)
             {
-                gridViewBookList.Rows.Add(
-                    book.BookId,
-                    book.Title,
-                    book.Author,
-                    book.BookGenre,
-                    book.Isbn,
-                    book.SellingPrice,
-                    book.StockQuantity);
+                // Prevent duplicate entries in DataGridView
+                if (!gridViewBookList.Rows.Cast<DataGridViewRow>()
+                    .Any(row => Convert.ToInt32(row.Cells["ID"].Value) == book.BookId))
+                {
+                    gridViewBookList.Rows.Add(
+                        book.BookId,
+                        book.Title,
+                        book.Author,
+                        book.BookGenre,
+                        book.Isbn,
+                        book.SellingPrice,
+                        book.StockQuantity
+                    );
+                }
             }
         }
 
@@ -224,11 +245,19 @@ namespace BookHavenWinFormUi.PanelForms
 
         private async void btnSaveBook_Click(object sender, EventArgs e)
         {
-           
+            using (var bookDialog = new BookDetailsDialog())
+            {
+                if (bookDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Get the book data from the dialog
+                    BookRequestDto newBook = bookDialog.BookData;
+
+                    // Save to repository
+                    SaveBookAsync(newBook, null);
+                }
+            }
 
         }
-
-        
 
         private void cmbBookGenres_MouseClick(object sender, MouseEventArgs e)
         {

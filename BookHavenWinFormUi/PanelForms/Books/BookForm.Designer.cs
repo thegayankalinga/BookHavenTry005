@@ -51,7 +51,9 @@
             // 
             gridViewBookList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gridViewBookList.Location = new Point(58, 167);
+            gridViewBookList.MultiSelect = false;
             gridViewBookList.Name = "gridViewBookList";
+            gridViewBookList.RowHeadersVisible = false;
             gridViewBookList.Size = new Size(922, 420);
             gridViewBookList.TabIndex = 1;
             // 
