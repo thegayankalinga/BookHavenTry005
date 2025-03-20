@@ -24,10 +24,13 @@ namespace BookHavenWinFormUi
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
-        private readonly SupplierForm _supplierForm;
-        public MainForm(SupplierForm supplierForm)
+
+      
+
+        public MainForm()
         {
-            _supplierForm = supplierForm;
+           
+
             InitializeComponent();
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
@@ -38,6 +41,7 @@ namespace BookHavenWinFormUi
             this.ControlBox = false;
             this.DoubleBuffered = true;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            
         }
 
         // Structs
@@ -107,6 +111,7 @@ namespace BookHavenWinFormUi
                 //open only form
                 currentChildForm.Close();
             }
+
             currentChildForm = childForm;
             currentChildForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -118,8 +123,6 @@ namespace BookHavenWinFormUi
             lblTitleChildForm.Text = childForm.Text;
 
         }
-
-
 
         //TODO: Do this for all buttons
         private void btnDashboard_Click(object sender, EventArgs e)
@@ -133,7 +136,16 @@ namespace BookHavenWinFormUi
         private void btnSupplier_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
-            OpenChildForm(_supplierForm);
+            var supplierForm = Program.Host.Services.GetRequiredService<SupplierForm>();
+            OpenChildForm(supplierForm);
+        }
+
+        private void btnBooks_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color1);
+            var bookForm = Program.Host.Services.GetRequiredService<BookForm>();
+            OpenChildForm(bookForm);
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -180,8 +192,6 @@ namespace BookHavenWinFormUi
 
             // Close current form
         }
-
-        
 
 
         //TODO: Implement these

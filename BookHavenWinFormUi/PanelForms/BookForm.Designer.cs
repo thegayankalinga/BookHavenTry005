@@ -28,211 +28,211 @@
         /// </summary>
         private void InitializeComponent()
         {
-            groupBox1 = new GroupBox();
             gridViewBookList = new DataGridView();
-            btnSaveBook = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            txtBookTitle = new TextBox();
-            this.txtAuthorName = new TextBox();
-            this.txtISBN = new TextBox();
-            this.txtSellingPrice = new TextBox();
+            btnAddNewBook = new Button();
             btnDeleteBook = new Button();
             btnEditBook = new Button();
-            btnAddBookStock = new Button();
-            label5 = new Label();
-            txtCurrentStock = new TextBox();
-            groupBox1.SuspendLayout();
+            lblSearchKey = new Label();
+            txtSearchKey = new TextBox();
+            cmbAuthor = new ComboBox();
+            lblAuthor = new Label();
+            lblGenre = new Label();
+            cmbGenre = new ComboBox();
+            groupBox1 = new GroupBox();
+            btnResetFilter = new Button();
+            btnSearch = new Button();
+            groupBox2 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)gridViewBookList).BeginInit();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(this.txtSellingPrice);
-            groupBox1.Controls.Add(txtCurrentStock);
-            groupBox1.Controls.Add(this.txtISBN);
-            groupBox1.Controls.Add(this.txtAuthorName);
-            groupBox1.Controls.Add(txtBookTitle);
-            groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(label1);
-            groupBox1.ForeColor = SystemColors.ButtonFace;
-            groupBox1.Location = new Point(51, 43);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(412, 391);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Book Record";
             // 
             // gridViewBookList
             // 
             gridViewBookList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridViewBookList.Location = new Point(506, 55);
+            gridViewBookList.Location = new Point(58, 167);
             gridViewBookList.Name = "gridViewBookList";
-            gridViewBookList.Size = new Size(521, 502);
+            gridViewBookList.Size = new Size(922, 420);
             gridViewBookList.TabIndex = 1;
             // 
-            // btnSaveBook
+            // btnAddNewBook
             // 
-            btnSaveBook.Location = new Point(340, 473);
-            btnSaveBook.Name = "btnSaveBook";
-            btnSaveBook.Size = new Size(123, 40);
-            btnSaveBook.TabIndex = 2;
-            btnSaveBook.Text = "Save";
-            btnSaveBook.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(24, 59);
-            label1.Name = "label1";
-            label1.Size = new Size(78, 21);
-            label1.TabIndex = 0;
-            label1.Text = "Book Title";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(24, 105);
-            label2.Name = "label2";
-            label2.Size = new Size(104, 21);
-            label2.TabIndex = 0;
-            label2.Text = "Author Name";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(24, 153);
-            label3.Name = "label3";
-            label3.Size = new Size(44, 21);
-            label3.TabIndex = 0;
-            label3.Text = "ISBN";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(24, 200);
-            label4.Name = "label4";
-            label4.Size = new Size(136, 21);
-            label4.TabIndex = 0;
-            label4.Text = "Selling Price [LKR]";
-            // 
-            // txtBookTitle
-            // 
-            txtBookTitle.Location = new Point(161, 61);
-            txtBookTitle.Name = "txtBookTitle";
-            txtBookTitle.Size = new Size(245, 29);
-            txtBookTitle.TabIndex = 1;
-            // 
-            // txtAuthorName
-            // 
-            this.txtAuthorName.Location = new Point(161, 102);
-            this.txtAuthorName.Name = "txtAuthorName";
-            this.txtAuthorName.Size = new Size(245, 29);
-            this.txtAuthorName.TabIndex = 1;
-            // 
-            // txtISBN
-            // 
-            this.txtISBN.Location = new Point(161, 150);
-            this.txtISBN.Name = "txtISBN";
-            this.txtISBN.Size = new Size(245, 29);
-            this.txtISBN.TabIndex = 1;
-            // 
-            // txtSellingPrice
-            // 
-            this.txtSellingPrice.Location = new Point(203, 197);
-            this.txtSellingPrice.Name = "txtSellingPrice";
-            this.txtSellingPrice.Size = new Size(203, 29);
-            this.txtSellingPrice.TabIndex = 1;
-            this.txtSellingPrice.TextAlign = HorizontalAlignment.Right;
+            btnAddNewBook.ForeColor = SystemColors.ActiveCaptionText;
+            btnAddNewBook.Location = new Point(21, 41);
+            btnAddNewBook.Name = "btnAddNewBook";
+            btnAddNewBook.Size = new Size(123, 40);
+            btnAddNewBook.TabIndex = 2;
+            btnAddNewBook.Text = "Add New";
+            btnAddNewBook.UseVisualStyleBackColor = true;
+            btnAddNewBook.Click += btnSaveBook_Click;
             // 
             // btnDeleteBook
             // 
-            btnDeleteBook.Location = new Point(904, 599);
+            btnDeleteBook.ForeColor = SystemColors.ActiveCaptionText;
+            btnDeleteBook.Location = new Point(328, 41);
             btnDeleteBook.Name = "btnDeleteBook";
             btnDeleteBook.Size = new Size(123, 40);
             btnDeleteBook.TabIndex = 2;
             btnDeleteBook.Text = "Delete";
             btnDeleteBook.UseVisualStyleBackColor = true;
+            btnDeleteBook.Click += btnDeleteBook_Click;
             // 
             // btnEditBook
             // 
-            btnEditBook.Location = new Point(762, 599);
+            btnEditBook.ForeColor = SystemColors.ActiveCaptionText;
+            btnEditBook.Location = new Point(172, 41);
             btnEditBook.Name = "btnEditBook";
             btnEditBook.Size = new Size(123, 40);
             btnEditBook.TabIndex = 2;
             btnEditBook.Text = "Edit";
             btnEditBook.UseVisualStyleBackColor = true;
+            btnEditBook.Click += btnEditBook_Click;
             // 
-            // btnAddBookStock
+            // lblSearchKey
             // 
-            btnAddBookStock.Location = new Point(610, 599);
-            btnAddBookStock.Name = "btnAddBookStock";
-            btnAddBookStock.Size = new Size(123, 40);
-            btnAddBookStock.TabIndex = 2;
-            btnAddBookStock.Text = "Add Stock";
-            btnAddBookStock.UseVisualStyleBackColor = true;
+            lblSearchKey.AutoSize = true;
+            lblSearchKey.ForeColor = SystemColors.ButtonHighlight;
+            lblSearchKey.Location = new Point(14, 33);
+            lblSearchKey.Name = "lblSearchKey";
+            lblSearchKey.Size = new Size(57, 21);
+            lblSearchKey.TabIndex = 3;
+            lblSearchKey.Text = "Search";
             // 
-            // label5
+            // txtSearchKey
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(24, 255);
-            label5.Name = "label5";
-            label5.Size = new Size(104, 21);
-            label5.TabIndex = 0;
-            label5.Text = "Current Stock";
+            txtSearchKey.Location = new Point(94, 30);
+            txtSearchKey.Name = "txtSearchKey";
+            txtSearchKey.Size = new Size(211, 29);
+            txtSearchKey.TabIndex = 4;
+            txtSearchKey.KeyPress += txtSearchKey_KeyPress;
             // 
-            // txtCurrentStock
+            // cmbAuthor
             // 
-            txtCurrentStock.Location = new Point(161, 252);
-            txtCurrentStock.Name = "txtCurrentStock";
-            txtCurrentStock.Size = new Size(245, 29);
-            txtCurrentStock.TabIndex = 1;
+            cmbAuthor.FormattingEnabled = true;
+            cmbAuthor.Location = new Point(407, 30);
+            cmbAuthor.Name = "cmbAuthor";
+            cmbAuthor.Size = new Size(205, 29);
+            cmbAuthor.TabIndex = 5;
+            cmbAuthor.SelectedIndexChanged += cmbAuthor_SelectedIndexChanged;
+            // 
+            // lblAuthor
+            // 
+            lblAuthor.AutoSize = true;
+            lblAuthor.ForeColor = SystemColors.ButtonHighlight;
+            lblAuthor.Location = new Point(333, 33);
+            lblAuthor.Name = "lblAuthor";
+            lblAuthor.Size = new Size(58, 21);
+            lblAuthor.TabIndex = 6;
+            lblAuthor.Text = "Author";
+            // 
+            // lblGenre
+            // 
+            lblGenre.AutoSize = true;
+            lblGenre.ForeColor = SystemColors.ButtonHighlight;
+            lblGenre.Location = new Point(643, 33);
+            lblGenre.Name = "lblGenre";
+            lblGenre.Size = new Size(52, 21);
+            lblGenre.TabIndex = 6;
+            lblGenre.Text = "Genre";
+            // 
+            // cmbGenre
+            // 
+            cmbGenre.FormattingEnabled = true;
+            cmbGenre.Location = new Point(713, 30);
+            cmbGenre.Name = "cmbGenre";
+            cmbGenre.Size = new Size(183, 29);
+            cmbGenre.TabIndex = 5;
+            cmbGenre.SelectedIndexChanged += cmbGenre_SelectedIndexChanged;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(lblGenre);
+            groupBox1.Controls.Add(lblAuthor);
+            groupBox1.Controls.Add(cmbGenre);
+            groupBox1.Controls.Add(btnResetFilter);
+            groupBox1.Controls.Add(btnSearch);
+            groupBox1.Controls.Add(cmbAuthor);
+            groupBox1.Controls.Add(txtSearchKey);
+            groupBox1.Controls.Add(lblSearchKey);
+            groupBox1.ForeColor = SystemColors.ControlDark;
+            groupBox1.Location = new Point(58, 19);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(922, 129);
+            groupBox1.TabIndex = 7;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Filter";
+            // 
+            // btnResetFilter
+            // 
+            btnResetFilter.ForeColor = SystemColors.ActiveCaptionText;
+            btnResetFilter.Location = new Point(634, 83);
+            btnResetFilter.Name = "btnResetFilter";
+            btnResetFilter.Size = new Size(123, 40);
+            btnResetFilter.TabIndex = 2;
+            btnResetFilter.Text = "Reset";
+            btnResetFilter.UseVisualStyleBackColor = true;
+            btnResetFilter.Click += btnResetFilter_Click;
+            // 
+            // btnSearch
+            // 
+            btnSearch.ForeColor = SystemColors.ActiveCaptionText;
+            btnSearch.Location = new Point(773, 83);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(123, 40);
+            btnSearch.TabIndex = 2;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(btnEditBook);
+            groupBox2.Controls.Add(btnDeleteBook);
+            groupBox2.Controls.Add(btnAddNewBook);
+            groupBox2.ForeColor = SystemColors.ButtonHighlight;
+            groupBox2.Location = new Point(63, 593);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(917, 104);
+            groupBox2.TabIndex = 8;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Actions";
             // 
             // BookForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
-            ClientSize = new Size(1132, 651);
-            Controls.Add(btnEditBook);
-            Controls.Add(btnDeleteBook);
-            Controls.Add(btnAddBookStock);
-            Controls.Add(btnSaveBook);
-            Controls.Add(gridViewBookList);
+            ClientSize = new Size(1062, 720);
+            Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            Controls.Add(gridViewBookList);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "BookForm";
             Text = "BookForm";
+            Load += BookForm_Load;
+            ((System.ComponentModel.ISupportInitialize)gridViewBookList).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gridViewBookList).EndInit();
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private GroupBox groupBox1;
         private DataGridView gridViewBookList;
-        private Button btnSaveBook;
-        private TextBox textBox4;
-        private TextBox textBox3;
-        private TextBox textBox2;
-        private TextBox txtBookTitle;
-        private Label label4;
-        private Label label3;
-        private Label label2;
-        private Label label1;
-        private TextBox txtCurrentStock;
-        private Label label5;
+        private Button btnAddNewBook;
         private Button btnDeleteBook;
         private Button btnEditBook;
-        private Button btnAddBookStock;
+        private Label lblSearchKey;
+        private TextBox txtSearchKey;
+        private ComboBox cmbAuthor;
+        private Label lblAuthor;
+        private Label lblGenre;
+        private ComboBox cmbGenre;
+        private GroupBox groupBox1;
+        private Button btnResetFilter;
+        private Button btnSearch;
+        private GroupBox groupBox2;
     }
 }

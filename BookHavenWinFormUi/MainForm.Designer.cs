@@ -71,7 +71,7 @@
             panelSideMenu.Dock = DockStyle.Left;
             panelSideMenu.Location = new Point(0, 0);
             panelSideMenu.Name = "panelSideMenu";
-            panelSideMenu.Size = new Size(220, 729);
+            panelSideMenu.Size = new Size(220, 798);
             panelSideMenu.TabIndex = 0;
             // 
             // btnLogout
@@ -85,7 +85,7 @@
             btnLogout.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnLogout.IconSize = 32;
             btnLogout.ImageAlign = ContentAlignment.MiddleLeft;
-            btnLogout.Location = new Point(0, 669);
+            btnLogout.Location = new Point(0, 738);
             btnLogout.Name = "btnLogout";
             btnLogout.Padding = new Padding(10, 0, 20, 0);
             btnLogout.Size = new Size(220, 60);
@@ -221,6 +221,7 @@
             btnBooks.TextAlign = ContentAlignment.MiddleLeft;
             btnBooks.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnBooks.UseVisualStyleBackColor = true;
+            btnBooks.Click += btnBooks_Click;
             // 
             // btnSupplier
             // 
@@ -337,7 +338,7 @@
             panelDesktop.Dock = DockStyle.Fill;
             panelDesktop.Location = new Point(220, 78);
             panelDesktop.Name = "panelDesktop";
-            panelDesktop.Size = new Size(1204, 651);
+            panelDesktop.Size = new Size(1204, 720);
             panelDesktop.TabIndex = 3;
             // 
             // pictureBox2
@@ -345,7 +346,7 @@
             pictureBox2.Anchor = AnchorStyles.None;
             pictureBox2.BackgroundImageLayout = ImageLayout.None;
             pictureBox2.Image = Properties.Resources.cropped_final_image;
-            pictureBox2.Location = new Point(401, 170);
+            pictureBox2.Location = new Point(401, 205);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(389, 288);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -357,7 +358,7 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
-            ClientSize = new Size(1424, 729);
+            ClientSize = new Size(1424, 798);
             Controls.Add(panelDesktop);
             Controls.Add(panelShadow);
             Controls.Add(panelTitleBar);

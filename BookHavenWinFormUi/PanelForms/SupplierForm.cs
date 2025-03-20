@@ -75,8 +75,12 @@ namespace BookHavenWinFormUi.PanelForms
 
             foreach (var supplier in suppliers)
             {
-                supplierDataGridView.Rows.Add(supplier.SupplierId, supplier.SupplierName, supplier.SupplierType.ToString(),
-                                              supplier.ContactPersonName, supplier.PhoneNumber);
+                supplierDataGridView.Rows.Add(
+                    supplier.SupplierId, 
+                    supplier.SupplierName, 
+                    supplier.SupplierType.ToString(),
+                    supplier.ContactPersonName, 
+                    supplier.PhoneNumber);
             }
         }
 

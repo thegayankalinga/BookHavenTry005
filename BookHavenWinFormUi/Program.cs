@@ -64,12 +64,14 @@ namespace BookHavenWinFormUi
                     services.AddScoped<ISupplierRepository, SupplierRepository>();
                     services.AddScoped<IBookRepository, BookRepository>();
                     services.AddScoped<ISupplierOrderRepository, SupplierOrderRepository>();
+                
 
 
                     //Register Forms
                     services.AddTransient<LoginForm>();
                     services.AddTransient<MainForm>();
                     services.AddTransient<SupplierForm>();
+                    services.AddTransient<BookForm>();
 
                     services.AddSingleton<NavigationService>();
 
