@@ -14,63 +14,59 @@ using System.Threading.Tasks;
 
 namespace BookHavenClassLibrary.Repositories
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository : IUserRepository
     {
-        private readonly AppDbContext _context;
+        private readonly IDbContextFactory<AppDbContext> _contextFactory;
 
-        public UserRepository(AppDbContext context)
+        public UserRepository(IDbContextFactory<AppDbContext> contextFactory)
         {
-            _context = context;
+            _contextFactory = contextFactory;
         }
 
         private string ComputeHash(string password, string salt)
         {
-            using (var sha256 = SHA256.Create())
-            {
-                string passwordWithSalt = password + salt;
-                byte[] bytes = Encoding.UTF8.GetBytes(passwordWithSalt);
-                byte[] hash = sha256.ComputeHash(bytes);
+            using var sha256 = SHA256.Create();
+            string passwordWithSalt = password + salt;
+            byte[] bytes = Encoding.UTF8.GetBytes(passwordWithSalt);
+            byte[] hash = sha256.ComputeHash(bytes);
 
-                return Convert.ToBase64String(hash);
-            }
+            return Convert.ToBase64String(hash);
         }
 
         private string GenerateSalt()
         {
             byte[] saltBytes = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(saltBytes);
-            }
-
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(saltBytes);
             return Convert.ToBase64String(saltBytes);
         }
 
-        public async Task<UserResponseDto?> Login(LoginRequestDto loginRequest)
+        public async Task<UserResponseDto?> LoginAsync(LoginRequestDto loginRequest)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email);
+            using var dbContext = _contextFactory.CreateDbContext();
+            var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == loginRequest.Email).ConfigureAwait(false);
+
             if (user == null)
                 return null;
 
-            //Verify the password
+            // Verify password
             string passwordHash = ComputeHash(loginRequest.Password, user.Salt);
             if (passwordHash != user.PasswordHash)
-            {
                 return null;
-                //TODO: Throw an exception
-            }
 
-            user.LastLoginAt = DateTime.Now;
-            _context.SaveChanges();
+            user.LastLoginAt = DateTime.UtcNow;
+            await dbContext.SaveChangesAsync().ConfigureAwait(false);
+
             return UserMapper.MapToUserResponseDto(user);
         }
 
-        public UserResponseDto? Register(RegistrationRequestDto registrationRequest)
+        public async Task<UserResponseDto?> RegisterAsync(RegistrationRequestDto registrationRequest)
         {
-            var existingUser = _context.Users.FirstOrDefault(u => u.Email == registrationRequest.Email);
+            using var dbContext = _contextFactory.CreateDbContext();
+            var existingUser = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == registrationRequest.Email).ConfigureAwait(false);
+
             if (existingUser != null)
-                return null;
-            //TODO: Return a custom exception here
+                return null; // Email already registered
 
             string salt = GenerateSalt();
             string passwordHash = ComputeHash(registrationRequest.Password, salt);
@@ -80,52 +76,52 @@ namespace BookHavenClassLibrary.Repositories
 
             try
             {
-                _context.Users.Add(user);
-                _context.SaveChanges();
+                await dbContext.Users.AddAsync(user).ConfigureAwait(false);
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
+                return UserMapper.MapToUserResponseDto(user);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine($"Error registering user: {e.Message}");
                 return null;
             }
-
-            return UserMapper.MapToUserResponseDto(user);
         }
 
-        public void SeedUsers()
+        public async Task SeedUsersAsync()
         {
-            if (!_context.Users.Any()) // Ensure we only seed if the database is empty
+            using var dbContext = _contextFactory.CreateDbContext();
+            if (!await dbContext.Users.AnyAsync().ConfigureAwait(false)) // Seed only if database is empty
             {
                 var users = new List<User>
-        {
-            new User
-            {
-                FirstName = "Admin",
-                LastName = "User",
-                Email = "admin@bookhaven.com",
-                Role = UserRoleType.Admin,
-                CreatedAt = DateTime.Now,
-                LastLoginAt = DateTime.Now
-            },
-            new User
-            {
-                FirstName = "John",
-                LastName = "Sales 001",
-                Email = "sales001@bookhaven.com",
-                Role = UserRoleType.Sales,
-                CreatedAt = DateTime.Now,
-                LastLoginAt = DateTime.Now
-            },
-            new User
-            {
-                FirstName = "John",
-                LastName = "Clerk 001",
-                Email = "clerk001@bookhaven.com",
-                Role = UserRoleType.Clerk,
-                CreatedAt = DateTime.Now,
-                LastLoginAt = DateTime.Now
-            }
-        };
+                {
+                    new User
+                    {
+                        FirstName = "Admin",
+                        LastName = "User",
+                        Email = "admin@bookhaven.com",
+                        Role = UserRoleType.Admin,
+                        CreatedAt = DateTime.UtcNow,
+                        LastLoginAt = DateTime.UtcNow
+                    },
+                    new User
+                    {
+                        FirstName = "John",
+                        LastName = "Sales",
+                        Email = "sales001@bookhaven.com",
+                        Role = UserRoleType.Sales,
+                        CreatedAt = DateTime.UtcNow,
+                        LastLoginAt = DateTime.UtcNow
+                    },
+                    new User
+                    {
+                        FirstName = "Jane",
+                        LastName = "Clerk",
+                        Email = "clerk001@bookhaven.com",
+                        Role = UserRoleType.Clerk,
+                        CreatedAt = DateTime.UtcNow,
+                        LastLoginAt = DateTime.UtcNow
+                    }
+                };
 
                 foreach (var user in users)
                 {
@@ -135,10 +131,10 @@ namespace BookHavenClassLibrary.Repositories
                     user.Salt = salt;
                     user.PasswordHash = passwordHash;
 
-                    _context.Users.Add(user);
+                    await dbContext.Users.AddAsync(user).ConfigureAwait(false);
                 }
 
-                _context.SaveChanges();
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
                 Console.WriteLine("✅ Users seeded successfully.");
             }
             else
@@ -146,6 +142,5 @@ namespace BookHavenClassLibrary.Repositories
                 Console.WriteLine("ℹ️ Users already exist in the database. No seeding performed.");
             }
         }
-
     }
 }
