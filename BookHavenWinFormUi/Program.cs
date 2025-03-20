@@ -51,20 +51,22 @@ namespace BookHavenWinFormUi
                         throw new InvalidOperationException("DefaultConnection is missing from appsettings.json");
                     }
 
-                    services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+                    //services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
+                    services.AddDbContextFactory<AppDbContext>(options => options.UseSqlServer(connectionString));
+
 
 
 
                     //Register Repositories
                     //services.AddSingleton<IRepository, Repository>();
-                    
+
 
 
                     services.AddScoped<IUserRepository, UserRepository>();
                     services.AddScoped<ISupplierRepository, SupplierRepository>();
                     services.AddScoped<IBookRepository, BookRepository>();
                     services.AddScoped<ISupplierOrderRepository, SupplierOrderRepository>();
-                
+                    services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
                     //Register Forms

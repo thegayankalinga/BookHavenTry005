@@ -6,59 +6,60 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BookHavenClassLibrary.Repositories
 {
     public class BookRepository : IBookRepository
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IDbContextFactory<AppDbContext> _contextFactory;
 
-        public BookRepository(AppDbContext context)
+        public BookRepository(IDbContextFactory<AppDbContext> contextFactory)
         {
-            _appDbContext = context;
+            _contextFactory = contextFactory;
         }
 
         public async Task<bool> BookExist(int bookId)
         {
-            return await _appDbContext.Books.AnyAsync(b => b.BookId == bookId);
+            using var dbContext = _contextFactory.CreateDbContext();
+            return await dbContext.Books.AnyAsync(b => b.BookId == bookId).ConfigureAwait(false);
         }
+
         public async Task<bool> AddBookAsync(BookRequestDto bookRequestDto)
         {
+            using var dbContext = _contextFactory.CreateDbContext();
             var book = BookMapper.MapToBook(bookRequestDto);
             try
             {
-                await _appDbContext.Books.AddAsync(book);
-                await _appDbContext.SaveChangesAsync();
+                await dbContext.Books.AddAsync(book).ConfigureAwait(false);
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine($"Error adding book: {ex.Message}");
                 return false;
             }
         }
 
         public async Task<List<BookResponseDto?>> GetAllBooksAsync()
         {
-            var books = await _appDbContext.Books.ToListAsync();
+            using var dbContext = _contextFactory.CreateDbContext();
+            var books = await dbContext.Books.AsNoTracking().ToListAsync().ConfigureAwait(false);
             return books.Select(BookMapper.MapToBookResponseDto).ToList();
         }
 
         public async Task<BookResponseDto?> GetBookByIdAsync(int bookId)
         {
-            var book = await _appDbContext.Books.FindAsync(bookId);
-
-            if (book == null)
-                return null;
-
-            return BookMapper.MapToBookResponseDto(book);
+            using var dbContext = _contextFactory.CreateDbContext();
+            var book = await dbContext.Books.FindAsync(bookId).ConfigureAwait(false);
+            return book == null ? null : BookMapper.MapToBookResponseDto(book);
         }
 
         public async Task<bool> UpdateBookAsync(int bookId, BookRequestDto bookRequestDto)
         {
-            var book = await _appDbContext.Books.FindAsync(bookId);
+            using var dbContext = _contextFactory.CreateDbContext();
+            var book = await dbContext.Books.FindAsync(bookId).ConfigureAwait(false);
 
             if (book == null)
                 return false;
@@ -70,23 +71,38 @@ namespace BookHavenClassLibrary.Repositories
             book.SellingPrice = bookRequestDto.SellingPrice;
             book.StockQuantity = bookRequestDto.StockQuantity;
 
-            _appDbContext.Books.Update(book);
-            await _appDbContext.SaveChangesAsync();
-
-            return true;
+            try
+            {
+                dbContext.Books.Update(book);
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating book {bookId}: {ex.Message}");
+                return false;
+            }
         }
 
         public async Task<bool> DeleteBookAsync(int bookId)
         {
-            var book = await _appDbContext.Books.FindAsync(bookId);
+            using var dbContext = _contextFactory.CreateDbContext();
+            var book = await dbContext.Books.FindAsync(bookId).ConfigureAwait(false);
 
             if (book == null)
                 return false;
 
-            _appDbContext.Books.Remove(book);
-            await _appDbContext.SaveChangesAsync();
-
-            return true;
+            try
+            {
+                dbContext.Books.Remove(book);
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting book {bookId}: {ex.Message}");
+                return false;
+            }
         }
     }
 }

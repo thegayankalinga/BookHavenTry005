@@ -1,6 +1,7 @@
 ﻿using BookHavenClassLibrary.Dtos.Book;
 using BookHavenClassLibrary.Enumz;
 using BookHavenClassLibrary.Interfaces;
+using BookHavenWinFormUi.PanelForms.Books;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -162,7 +163,9 @@ namespace BookHavenWinFormUi.PanelForms
         private void ApplyFilters()
         {
             string searchText = txtSearchKey.Text.Trim().ToLower();
-            string selectedAuthor = cmbAuthor.SelectedItem.ToString();
+            string selectedAuthor = cmbAuthor.SelectedItem != null ? cmbAuthor.SelectedItem.ToString() : string.Empty;
+
+            //string selectedAuthor = cmbAuthor.SelectedItem.ToString();
             var selectedGenreItem = cmbGenre.SelectedItem as KeyValuePair<string, BookGenres>?;
 
             var filterBooks = allBooks.ToList();
@@ -221,29 +224,11 @@ namespace BookHavenWinFormUi.PanelForms
 
         private async void btnSaveBook_Click(object sender, EventArgs e)
         {
-            using (var bookDialog = new BookDetailsDialog())
-            {
-                if (bookDialog.ShowDialog() == DialogResult.OK)
-                {
-                    // Get the book data from the dialog
-                    BookRequestDto newBook = bookDialog.BookData;
-
-                    // Save to repository
-                    SaveBookAsync(newBook, null);
-                }
-            }
+           
 
         }
 
-        private void ClearForm()
-        {
-            //txtBookTitle.Text = "";
-            //txtAuthorName.Text = "";
-            //cmbBookGenres.SelectedIndex = -1;
-            //txtISBN.Text = "";
-            //txtSellingPrice.Text = "";
-            //txtCurrentStock.Text = "";
-        }
+        
 
         private void cmbBookGenres_MouseClick(object sender, MouseEventArgs e)
         {
