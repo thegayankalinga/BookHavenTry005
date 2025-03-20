@@ -6,84 +6,84 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BookHavenClassLibrary.Repositories
 {
     public class SupplierRepository : ISupplierRepository
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly IDbContextFactory<AppDbContext> _contextFactory;
 
-        public SupplierRepository(AppDbContext context)
+        public SupplierRepository(IDbContextFactory<AppDbContext> contextFactory)
         {
-            _appDbContext = context;
+            _contextFactory = contextFactory;
         }
 
         public async Task<bool> SupplierExist(int supplierId)
         {
-            return await _appDbContext.Suppliers.AnyAsync(s => s.SupplierId == supplierId);
+            using var dbContext = _contextFactory.CreateDbContext();
+            return await dbContext.Suppliers.AnyAsync(s => s.SupplierId == supplierId).ConfigureAwait(false);
         }
+
         public async Task<bool> AddSupplierAsync(SupplierRequestDto supplierRequestDto)
         {
+            using var dbContext = _contextFactory.CreateDbContext();
             var supplier = SupplierMapper.MaptoSupplier(supplierRequestDto);
             try
             {
-                await _appDbContext.Suppliers.AddAsync(supplier);
-                await _appDbContext.SaveChangesAsync();
+                await dbContext.Suppliers.AddAsync(supplier).ConfigureAwait(false);
+                await dbContext.SaveChangesAsync().ConfigureAwait(false);
                 return true;
             }
-            catch (Exception ex) { 
-                Console.WriteLine(ex.ToString());
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error adding supplier: {ex.Message}");
                 return false;
             }
         }
 
         public async Task<bool> DeleteSupplierAsync(int supplierId)
         {
-            var supplier = await _appDbContext.Suppliers.FindAsync(supplierId);
+            using var dbContext = _contextFactory.CreateDbContext();
+            var supplier = await dbContext.Suppliers.FindAsync(supplierId).ConfigureAwait(false);
 
             if (supplier == null)
                 return false;
 
-            _appDbContext.Suppliers.Remove(supplier);
-            await _appDbContext.SaveChangesAsync();
-
-            return true; 
+            dbContext.Suppliers.Remove(supplier);
+            await dbContext.SaveChangesAsync().ConfigureAwait(false);
+            return true;
         }
 
         public async Task<List<SupplierResponseDto?>> GetAllSuppliersAsync()
         {
-            var suppliers = await _appDbContext.Suppliers.ToListAsync(); 
-            return suppliers.Select(SupplierMapper.MapToSupplierReponseDto).ToList(); 
+            using var dbContext = _contextFactory.CreateDbContext();
+            var suppliers = await dbContext.Suppliers.ToListAsync().ConfigureAwait(false);
+            return suppliers.Select(SupplierMapper.MapToSupplierReponseDto).ToList();
         }
 
         public async Task<SupplierResponseDto?> GetSupplierByIdAsync(int supplierId)
         {
-            var supplier = await _appDbContext.Suppliers.FindAsync(supplierId);
-
-            if (supplier == null)
-                return null;
-
-            return SupplierMapper.MapToSupplierReponseDto(supplier);
+            using var dbContext = _contextFactory.CreateDbContext();
+            var supplier = await dbContext.Suppliers.FindAsync(supplierId).ConfigureAwait(false);
+            return supplier == null ? null : SupplierMapper.MapToSupplierReponseDto(supplier);
         }
 
         public async Task<bool> UpdateSupplierAsync(int supplierId, SupplierRequestDto supplierRequestDto)
         {
-            var supplier = await _appDbContext.Suppliers.FindAsync(supplierId);
+            using var dbContext = _contextFactory.CreateDbContext();
+            var supplier = await dbContext.Suppliers.FindAsync(supplierId).ConfigureAwait(false);
 
             if (supplier == null)
                 return false;
 
-            // Manually update properties
             supplier.SupplierName = supplierRequestDto.SupplierName;
             supplier.ContactPersonName = supplierRequestDto.ContactPersonName;
             supplier.PhoneNumber = supplierRequestDto.PhoneNumber;
             supplier.SupplierType = supplierRequestDto.SupplierType;
 
-            _appDbContext.Suppliers.Update(supplier);
-            await _appDbContext.SaveChangesAsync();
-
+            dbContext.Suppliers.Update(supplier);
+            await dbContext.SaveChangesAsync().ConfigureAwait(false);
             return true;
         }
     }
