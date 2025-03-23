@@ -2,6 +2,7 @@
 using BookHavenClassLibrary.Enumz;
 using BookHavenClassLibrary.Interfaces;
 using BookHavenWinFormUi.PanelForms.Books;
+using BookHavenWinFormUi.Utilz;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,52 +30,20 @@ namespace BookHavenWinFormUi.PanelForms
             this.Load += BookForm_Load;
         }
 
-        private void ConfigureDataGridView()
+        private void ConfigureBooksGrid()
         {
-            // Clear existing columns
-            gridViewBookList.Columns.Clear();
+            var columns = new List<(string Name, DataGridViewAutoSizeColumnMode SizeMode)>
+    {
+                ("ID", DataGridViewAutoSizeColumnMode.AllCells),
+                ("Title", DataGridViewAutoSizeColumnMode.Fill),
+                ("Author", DataGridViewAutoSizeColumnMode.AllCells),
+                ("Genre", DataGridViewAutoSizeColumnMode.AllCells),
+                ("ISBN", DataGridViewAutoSizeColumnMode.AllCells),
+                ("Price", DataGridViewAutoSizeColumnMode.AllCells),
+                ("StockQty", DataGridViewAutoSizeColumnMode.AllCells)
+    };
 
-            // Add columns
-            gridViewBookList.ColumnCount = 7;
-
-            gridViewBookList.Columns[0].Name = "ID";
-            gridViewBookList.Columns[1].Name = "Title";
-            gridViewBookList.Columns[2].Name = "Author";
-            gridViewBookList.Columns[3].Name = "Genre";
-            gridViewBookList.Columns[4].Name = "ISBN";
-            gridViewBookList.Columns[5].Name = "Price";
-            gridViewBookList.Columns[6].Name = "StockQty";
-
-            // Set auto-sizing for better appearance
-            gridViewBookList.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            gridViewBookList.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            gridViewBookList.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            gridViewBookList.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            gridViewBookList.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            gridViewBookList.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            gridViewBookList.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-
-
-            // Set row height to make it look better
-            gridViewBookList.RowTemplate.Height = 30;
-
-            // Enable full row selection
-            gridViewBookList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            gridViewBookList.MultiSelect = false;
-
-            // Set better visual appearance
-            gridViewBookList.AllowUserToAddRows = false;
-            gridViewBookList.AllowUserToResizeColumns = true;
-            gridViewBookList.AllowUserToResizeRows = false;
-            gridViewBookList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridViewBookList.DefaultCellStyle.Font = new Font("Segoe UI", 10);
-            gridViewBookList.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-
-            gridViewBookList.RowTemplate.Height = 30;
-            gridViewBookList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            gridViewBookList.MultiSelect = false;
-            gridViewBookList.AllowUserToAddRows = false;
-
+            DataGridViewUtility.ConfigureGrid(gridViewBookList, columns);
         }
 
         private async Task LoadBooksAsync()
@@ -89,7 +58,7 @@ namespace BookHavenWinFormUi.PanelForms
 
             if (gridViewBookList.Columns.Count == 0)
             {
-                ConfigureDataGridView();
+                ConfigureBooksGrid();
             }
 
             gridViewBookList.Rows.Clear();
@@ -134,7 +103,7 @@ namespace BookHavenWinFormUi.PanelForms
         private async void BookForm_Load(object sender, EventArgs e)
         {
             //MessageBox.Show("Form is loading");
-            ConfigureDataGridView();
+            ConfigureBooksGrid();
             await LoadBooksAsync();
             SetupFilterComboBoxes();
 

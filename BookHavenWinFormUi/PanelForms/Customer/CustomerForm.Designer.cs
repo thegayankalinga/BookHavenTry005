@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             groupBox2 = new GroupBox();
-            btnEditBook = new Button();
-            btnDeleteBook = new Button();
-            btnAddNewBook = new Button();
+            btnEditCustomer = new Button();
+            btnDeleteCustomer = new Button();
+            btnAddNewCustomer = new Button();
             groupBox1 = new GroupBox();
             btnResetFilter = new Button();
             btnSearch = new Button();
             txtSearchKey = new TextBox();
             lblSearchKey = new Label();
-            gridViewBookList = new DataGridView();
+            gridViewCustomerList = new DataGridView();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridViewBookList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewCustomerList).BeginInit();
             SuspendLayout();
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(btnEditBook);
-            groupBox2.Controls.Add(btnDeleteBook);
-            groupBox2.Controls.Add(btnAddNewBook);
+            groupBox2.Controls.Add(btnEditCustomer);
+            groupBox2.Controls.Add(btnDeleteCustomer);
+            groupBox2.Controls.Add(btnAddNewCustomer);
             groupBox2.ForeColor = SystemColors.ButtonHighlight;
             groupBox2.Location = new Point(75, 595);
             groupBox2.Name = "groupBox2";
@@ -56,35 +56,35 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Actions";
             // 
-            // btnEditBook
+            // btnEditCustomer
             // 
-            btnEditBook.ForeColor = SystemColors.ActiveCaptionText;
-            btnEditBook.Location = new Point(172, 41);
-            btnEditBook.Name = "btnEditBook";
-            btnEditBook.Size = new Size(123, 40);
-            btnEditBook.TabIndex = 2;
-            btnEditBook.Text = "Edit";
-            btnEditBook.UseVisualStyleBackColor = true;
+            btnEditCustomer.ForeColor = SystemColors.ActiveCaptionText;
+            btnEditCustomer.Location = new Point(172, 41);
+            btnEditCustomer.Name = "btnEditCustomer";
+            btnEditCustomer.Size = new Size(123, 40);
+            btnEditCustomer.TabIndex = 2;
+            btnEditCustomer.Text = "Edit";
+            btnEditCustomer.UseVisualStyleBackColor = true;
             // 
-            // btnDeleteBook
+            // btnDeleteCustomer
             // 
-            btnDeleteBook.ForeColor = SystemColors.ActiveCaptionText;
-            btnDeleteBook.Location = new Point(328, 41);
-            btnDeleteBook.Name = "btnDeleteBook";
-            btnDeleteBook.Size = new Size(123, 40);
-            btnDeleteBook.TabIndex = 2;
-            btnDeleteBook.Text = "Delete";
-            btnDeleteBook.UseVisualStyleBackColor = true;
+            btnDeleteCustomer.ForeColor = SystemColors.ActiveCaptionText;
+            btnDeleteCustomer.Location = new Point(328, 41);
+            btnDeleteCustomer.Name = "btnDeleteCustomer";
+            btnDeleteCustomer.Size = new Size(123, 40);
+            btnDeleteCustomer.TabIndex = 2;
+            btnDeleteCustomer.Text = "Delete";
+            btnDeleteCustomer.UseVisualStyleBackColor = true;
             // 
-            // btnAddNewBook
+            // btnAddNewCustomer
             // 
-            btnAddNewBook.ForeColor = SystemColors.ActiveCaptionText;
-            btnAddNewBook.Location = new Point(21, 41);
-            btnAddNewBook.Name = "btnAddNewBook";
-            btnAddNewBook.Size = new Size(123, 40);
-            btnAddNewBook.TabIndex = 2;
-            btnAddNewBook.Text = "Add New";
-            btnAddNewBook.UseVisualStyleBackColor = true;
+            btnAddNewCustomer.ForeColor = SystemColors.ActiveCaptionText;
+            btnAddNewCustomer.Location = new Point(21, 41);
+            btnAddNewCustomer.Name = "btnAddNewCustomer";
+            btnAddNewCustomer.Size = new Size(123, 40);
+            btnAddNewCustomer.TabIndex = 2;
+            btnAddNewCustomer.Text = "Add New";
+            btnAddNewCustomer.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -137,15 +137,15 @@
             lblSearchKey.TabIndex = 3;
             lblSearchKey.Text = "Search";
             // 
-            // gridViewBookList
+            // gridViewCustomerList
             // 
-            gridViewBookList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridViewBookList.Location = new Point(70, 169);
-            gridViewBookList.MultiSelect = false;
-            gridViewBookList.Name = "gridViewBookList";
-            gridViewBookList.RowHeadersVisible = false;
-            gridViewBookList.Size = new Size(922, 420);
-            gridViewBookList.TabIndex = 9;
+            gridViewCustomerList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridViewCustomerList.Location = new Point(70, 169);
+            gridViewCustomerList.MultiSelect = false;
+            gridViewCustomerList.Name = "gridViewCustomerList";
+            gridViewCustomerList.RowHeadersVisible = false;
+            gridViewCustomerList.Size = new Size(922, 420);
+            gridViewCustomerList.TabIndex = 9;
             // 
             // CustomerForm
             // 
@@ -155,31 +155,31 @@
             ClientSize = new Size(1062, 720);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Controls.Add(gridViewBookList);
+            Controls.Add(gridViewCustomerList);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "CustomerForm";
             Text = "CustomerForm";
             Load += CustomerForm_Load;
             groupBox2.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gridViewBookList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewCustomerList).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
         private GroupBox groupBox2;
-        private Button btnEditBook;
-        private Button btnDeleteBook;
-        private Button btnAddNewBook;
+        private Button btnEditCustomer;
+        private Button btnDeleteCustomer;
+        private Button btnAddNewCustomer;
         private GroupBox groupBox1;
         private Button btnResetFilter;
         private Button btnSearch;
         private TextBox txtSearchKey;
         private Label lblSearchKey;
-        private DataGridView gridViewBookList;
+        private DataGridView gridViewCustomerList;
     }
 }

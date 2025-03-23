@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookHavenClassLibrary.Dtos.Customer;
+using BookHavenClassLibrary.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +14,12 @@ namespace BookHavenWinFormUi.PanelForms.Customer
 {
     public partial class CustomerForm : Form
     {
-        public CustomerForm()
+        private readonly ICustomerRepository _customerRepository;
+        private List<CustomerReponseDto> allCustomers = new List<CustomerReponseDto>();
+        private int? editingCustomerId = null;
+        public CustomerForm(ICustomerRepository customerRepository)
         {
+            _customerRepository = customerRepository;
             InitializeComponent();
         }
 
