@@ -1,4 +1,8 @@
 ﻿using BookHavenWinFormUi.PanelForms;
+using BookHavenWinFormUi.PanelForms.Customer;
+using BookHavenWinFormUi.PanelForms.Reports;
+using BookHavenWinFormUi.PanelForms.Supplier;
+using BookHavenWinFormUi.PanelForms.User;
 using BookHavenWinFormUi.Utilz;
 using FontAwesome.Sharp;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,11 +29,11 @@ namespace BookHavenWinFormUi
         private Panel leftBorderBtn;
         private Form currentChildForm;
 
-      
+
 
         public MainForm()
         {
-           
+
 
             InitializeComponent();
             leftBorderBtn = new Panel();
@@ -41,7 +45,7 @@ namespace BookHavenWinFormUi
             this.ControlBox = false;
             this.DoubleBuffered = true;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
-            
+
         }
 
         // Structs
@@ -128,6 +132,8 @@ namespace BookHavenWinFormUi
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
+            var dashboardForm = Program.Host.Services.GetRequiredService<Dashboard>();
+            OpenChildForm(dashboardForm);
 
             //TODO: For all child forms to open in the button click
             //OpenChildForm(new FormDashboard());
@@ -147,6 +153,46 @@ namespace BookHavenWinFormUi
             OpenChildForm(bookForm);
 
         }
+
+        private void btnUsers_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color1);
+            var userForm = Program.Host.Services.GetRequiredService<UserForm>();
+            OpenChildForm(userForm);
+
+        }
+
+        private void btnSupplierOrder_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color1);
+            var orderForm = Program.Host.Services.GetRequiredService<OrderForm>();
+            OpenChildForm(orderForm);
+        }
+
+        private void btnSales_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color1);
+            var salesForm = Program.Host.Services.GetRequiredService<SalesForm>();
+            OpenChildForm(salesForm);
+        }
+
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color1);
+            var reportForm = Program.Host.Services.GetRequiredService<Report>();
+            OpenChildForm(reportForm);
+        }
+
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color1);
+            var customerForm = Program.Host.Services.GetRequiredService<CustomerForm>();
+            OpenChildForm(customerForm);
+
+        }
+
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -192,6 +238,14 @@ namespace BookHavenWinFormUi
 
             // Close current form
         }
+
+       
+
+
+
+
+
+
 
 
         //TODO: Implement these

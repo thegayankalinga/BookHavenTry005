@@ -30,11 +30,10 @@
         {
             panelSideMenu = new Panel();
             btnLogout = new FontAwesome.Sharp.IconButton();
-            iconButton8 = new FontAwesome.Sharp.IconButton();
-            iconButton7 = new FontAwesome.Sharp.IconButton();
-            iconButton6 = new FontAwesome.Sharp.IconButton();
-            iconButton5 = new FontAwesome.Sharp.IconButton();
-            iconButton4 = new FontAwesome.Sharp.IconButton();
+            btnReport = new FontAwesome.Sharp.IconButton();
+            btnSales = new FontAwesome.Sharp.IconButton();
+            btnSupplierOrder = new FontAwesome.Sharp.IconButton();
+            btnUsers = new FontAwesome.Sharp.IconButton();
             btnBooks = new FontAwesome.Sharp.IconButton();
             btnSupplier = new FontAwesome.Sharp.IconButton();
             btnDashboard = new FontAwesome.Sharp.IconButton();
@@ -46,6 +45,7 @@
             panelShadow = new Panel();
             panelDesktop = new Panel();
             pictureBox2 = new PictureBox();
+            btnCustomer = new FontAwesome.Sharp.IconButton();
             panelSideMenu.SuspendLayout();
             panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -58,12 +58,12 @@
             // panelSideMenu
             // 
             panelSideMenu.BackColor = Color.FromArgb(31, 30, 68);
+            panelSideMenu.Controls.Add(btnCustomer);
             panelSideMenu.Controls.Add(btnLogout);
-            panelSideMenu.Controls.Add(iconButton8);
-            panelSideMenu.Controls.Add(iconButton7);
-            panelSideMenu.Controls.Add(iconButton6);
-            panelSideMenu.Controls.Add(iconButton5);
-            panelSideMenu.Controls.Add(iconButton4);
+            panelSideMenu.Controls.Add(btnReport);
+            panelSideMenu.Controls.Add(btnSales);
+            panelSideMenu.Controls.Add(btnSupplierOrder);
+            panelSideMenu.Controls.Add(btnUsers);
             panelSideMenu.Controls.Add(btnBooks);
             panelSideMenu.Controls.Add(btnSupplier);
             panelSideMenu.Controls.Add(btnDashboard);
@@ -96,110 +96,93 @@
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
-            // iconButton8
+            // btnReport
             // 
-            iconButton8.Dock = DockStyle.Top;
-            iconButton8.FlatAppearance.BorderSize = 0;
-            iconButton8.FlatStyle = FlatStyle.Flat;
-            iconButton8.ForeColor = Color.Gainsboro;
-            iconButton8.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
-            iconButton8.IconColor = Color.RosyBrown;
-            iconButton8.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton8.IconSize = 32;
-            iconButton8.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton8.Location = new Point(0, 560);
-            iconButton8.Name = "iconButton8";
-            iconButton8.Padding = new Padding(10, 0, 20, 0);
-            iconButton8.Size = new Size(220, 60);
-            iconButton8.TabIndex = 9;
-            iconButton8.Text = "iconButton8";
-            iconButton8.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton8.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton8.UseVisualStyleBackColor = true;
+            btnReport.Dock = DockStyle.Top;
+            btnReport.FlatAppearance.BorderSize = 0;
+            btnReport.FlatStyle = FlatStyle.Flat;
+            btnReport.ForeColor = Color.Gainsboro;
+            btnReport.IconChar = FontAwesome.Sharp.IconChar.ChartArea;
+            btnReport.IconColor = Color.RosyBrown;
+            btnReport.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnReport.IconSize = 32;
+            btnReport.ImageAlign = ContentAlignment.MiddleLeft;
+            btnReport.Location = new Point(0, 500);
+            btnReport.Name = "btnReport";
+            btnReport.Padding = new Padding(10, 0, 20, 0);
+            btnReport.Size = new Size(220, 60);
+            btnReport.TabIndex = 8;
+            btnReport.Text = "Report";
+            btnReport.TextAlign = ContentAlignment.MiddleLeft;
+            btnReport.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnReport.UseVisualStyleBackColor = true;
+            btnReport.Click += btnReport_Click;
             // 
-            // iconButton7
+            // btnSales
             // 
-            iconButton7.Dock = DockStyle.Top;
-            iconButton7.FlatAppearance.BorderSize = 0;
-            iconButton7.FlatStyle = FlatStyle.Flat;
-            iconButton7.ForeColor = Color.Gainsboro;
-            iconButton7.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
-            iconButton7.IconColor = Color.RosyBrown;
-            iconButton7.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton7.IconSize = 32;
-            iconButton7.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton7.Location = new Point(0, 500);
-            iconButton7.Name = "iconButton7";
-            iconButton7.Padding = new Padding(10, 0, 20, 0);
-            iconButton7.Size = new Size(220, 60);
-            iconButton7.TabIndex = 8;
-            iconButton7.Text = "iconButton7";
-            iconButton7.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton7.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton7.UseVisualStyleBackColor = true;
+            btnSales.Dock = DockStyle.Top;
+            btnSales.FlatAppearance.BorderSize = 0;
+            btnSales.FlatStyle = FlatStyle.Flat;
+            btnSales.ForeColor = Color.Gainsboro;
+            btnSales.IconChar = FontAwesome.Sharp.IconChar.Bullhorn;
+            btnSales.IconColor = Color.RosyBrown;
+            btnSales.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSales.IconSize = 32;
+            btnSales.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSales.Location = new Point(0, 440);
+            btnSales.Name = "btnSales";
+            btnSales.Padding = new Padding(10, 0, 20, 0);
+            btnSales.Size = new Size(220, 60);
+            btnSales.TabIndex = 7;
+            btnSales.Text = "Sales";
+            btnSales.TextAlign = ContentAlignment.MiddleLeft;
+            btnSales.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnSales.UseVisualStyleBackColor = true;
+            btnSales.Click += btnSales_Click;
             // 
-            // iconButton6
+            // btnSupplierOrder
             // 
-            iconButton6.Dock = DockStyle.Top;
-            iconButton6.FlatAppearance.BorderSize = 0;
-            iconButton6.FlatStyle = FlatStyle.Flat;
-            iconButton6.ForeColor = Color.Gainsboro;
-            iconButton6.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
-            iconButton6.IconColor = Color.RosyBrown;
-            iconButton6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton6.IconSize = 32;
-            iconButton6.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton6.Location = new Point(0, 440);
-            iconButton6.Name = "iconButton6";
-            iconButton6.Padding = new Padding(10, 0, 20, 0);
-            iconButton6.Size = new Size(220, 60);
-            iconButton6.TabIndex = 7;
-            iconButton6.Text = "iconButton6";
-            iconButton6.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton6.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton6.UseVisualStyleBackColor = true;
+            btnSupplierOrder.Dock = DockStyle.Top;
+            btnSupplierOrder.FlatAppearance.BorderSize = 0;
+            btnSupplierOrder.FlatStyle = FlatStyle.Flat;
+            btnSupplierOrder.ForeColor = Color.Gainsboro;
+            btnSupplierOrder.IconChar = FontAwesome.Sharp.IconChar.Shop;
+            btnSupplierOrder.IconColor = Color.RosyBrown;
+            btnSupplierOrder.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnSupplierOrder.IconSize = 32;
+            btnSupplierOrder.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSupplierOrder.Location = new Point(0, 380);
+            btnSupplierOrder.Name = "btnSupplierOrder";
+            btnSupplierOrder.Padding = new Padding(10, 0, 20, 0);
+            btnSupplierOrder.Size = new Size(220, 60);
+            btnSupplierOrder.TabIndex = 6;
+            btnSupplierOrder.Text = "Orders";
+            btnSupplierOrder.TextAlign = ContentAlignment.MiddleLeft;
+            btnSupplierOrder.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnSupplierOrder.UseVisualStyleBackColor = true;
+            btnSupplierOrder.Click += btnSupplierOrder_Click;
             // 
-            // iconButton5
+            // btnUsers
             // 
-            iconButton5.Dock = DockStyle.Top;
-            iconButton5.FlatAppearance.BorderSize = 0;
-            iconButton5.FlatStyle = FlatStyle.Flat;
-            iconButton5.ForeColor = Color.Gainsboro;
-            iconButton5.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
-            iconButton5.IconColor = Color.RosyBrown;
-            iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton5.IconSize = 32;
-            iconButton5.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton5.Location = new Point(0, 380);
-            iconButton5.Name = "iconButton5";
-            iconButton5.Padding = new Padding(10, 0, 20, 0);
-            iconButton5.Size = new Size(220, 60);
-            iconButton5.TabIndex = 6;
-            iconButton5.Text = "iconButton5";
-            iconButton5.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton5.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton5.UseVisualStyleBackColor = true;
-            // 
-            // iconButton4
-            // 
-            iconButton4.Dock = DockStyle.Top;
-            iconButton4.FlatAppearance.BorderSize = 0;
-            iconButton4.FlatStyle = FlatStyle.Flat;
-            iconButton4.ForeColor = Color.Gainsboro;
-            iconButton4.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
-            iconButton4.IconColor = Color.RosyBrown;
-            iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            iconButton4.IconSize = 32;
-            iconButton4.ImageAlign = ContentAlignment.MiddleLeft;
-            iconButton4.Location = new Point(0, 320);
-            iconButton4.Name = "iconButton4";
-            iconButton4.Padding = new Padding(10, 0, 20, 0);
-            iconButton4.Size = new Size(220, 60);
-            iconButton4.TabIndex = 5;
-            iconButton4.Text = "iconButton4";
-            iconButton4.TextAlign = ContentAlignment.MiddleLeft;
-            iconButton4.TextImageRelation = TextImageRelation.ImageBeforeText;
-            iconButton4.UseVisualStyleBackColor = true;
+            btnUsers.Dock = DockStyle.Top;
+            btnUsers.FlatAppearance.BorderSize = 0;
+            btnUsers.FlatStyle = FlatStyle.Flat;
+            btnUsers.ForeColor = Color.Gainsboro;
+            btnUsers.IconChar = FontAwesome.Sharp.IconChar.UserFriends;
+            btnUsers.IconColor = Color.RosyBrown;
+            btnUsers.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnUsers.IconSize = 32;
+            btnUsers.ImageAlign = ContentAlignment.MiddleLeft;
+            btnUsers.Location = new Point(0, 320);
+            btnUsers.Name = "btnUsers";
+            btnUsers.Padding = new Padding(10, 0, 20, 0);
+            btnUsers.Size = new Size(220, 60);
+            btnUsers.TabIndex = 5;
+            btnUsers.Text = "Users";
+            btnUsers.TextAlign = ContentAlignment.MiddleLeft;
+            btnUsers.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnUsers.UseVisualStyleBackColor = true;
+            btnUsers.Click += btnUsers_Click;
             // 
             // btnBooks
             // 
@@ -207,7 +190,7 @@
             btnBooks.FlatAppearance.BorderSize = 0;
             btnBooks.FlatStyle = FlatStyle.Flat;
             btnBooks.ForeColor = Color.Gainsboro;
-            btnBooks.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
+            btnBooks.IconChar = FontAwesome.Sharp.IconChar.Book;
             btnBooks.IconColor = Color.RosyBrown;
             btnBooks.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnBooks.IconSize = 32;
@@ -229,7 +212,7 @@
             btnSupplier.FlatAppearance.BorderSize = 0;
             btnSupplier.FlatStyle = FlatStyle.Flat;
             btnSupplier.ForeColor = Color.Gainsboro;
-            btnSupplier.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
+            btnSupplier.IconChar = FontAwesome.Sharp.IconChar.Shop;
             btnSupplier.IconColor = Color.RosyBrown;
             btnSupplier.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSupplier.IconSize = 32;
@@ -239,7 +222,7 @@
             btnSupplier.Padding = new Padding(10, 0, 20, 0);
             btnSupplier.Size = new Size(220, 60);
             btnSupplier.TabIndex = 3;
-            btnSupplier.Text = "Supplier";
+            btnSupplier.Text = "Suppliers";
             btnSupplier.TextAlign = ContentAlignment.MiddleLeft;
             btnSupplier.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnSupplier.UseVisualStyleBackColor = true;
@@ -353,6 +336,28 @@
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
             // 
+            // btnCustomer
+            // 
+            btnCustomer.Dock = DockStyle.Top;
+            btnCustomer.FlatAppearance.BorderSize = 0;
+            btnCustomer.FlatStyle = FlatStyle.Flat;
+            btnCustomer.ForeColor = Color.Gainsboro;
+            btnCustomer.IconChar = FontAwesome.Sharp.IconChar.Bullhorn;
+            btnCustomer.IconColor = Color.RosyBrown;
+            btnCustomer.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnCustomer.IconSize = 32;
+            btnCustomer.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCustomer.Location = new Point(0, 560);
+            btnCustomer.Name = "btnCustomer";
+            btnCustomer.Padding = new Padding(10, 0, 20, 0);
+            btnCustomer.Size = new Size(220, 60);
+            btnCustomer.TabIndex = 11;
+            btnCustomer.Text = "Customer";
+            btnCustomer.TextAlign = ContentAlignment.MiddleLeft;
+            btnCustomer.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnCustomer.UseVisualStyleBackColor = true;
+            btnCustomer.Click += btnCustomer_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
@@ -384,11 +389,10 @@
         private Panel panelLogo;
         private FontAwesome.Sharp.IconButton btnDashboard;
         private FontAwesome.Sharp.IconButton btnLogout;
-        private FontAwesome.Sharp.IconButton iconButton8;
-        private FontAwesome.Sharp.IconButton iconButton7;
-        private FontAwesome.Sharp.IconButton iconButton6;
-        private FontAwesome.Sharp.IconButton iconButton5;
-        private FontAwesome.Sharp.IconButton iconButton4;
+        private FontAwesome.Sharp.IconButton btnReport;
+        private FontAwesome.Sharp.IconButton btnSales;
+        private FontAwesome.Sharp.IconButton btnSupplierOrder;
+        private FontAwesome.Sharp.IconButton btnUsers;
         private FontAwesome.Sharp.IconButton btnBooks;
         private FontAwesome.Sharp.IconButton btnSupplier;
         private PictureBox pictureBox1;
@@ -398,5 +402,6 @@
         private Panel panelShadow;
         private Panel panelDesktop;
         private PictureBox pictureBox2;
+        private FontAwesome.Sharp.IconButton btnCustomer;
     }
 }

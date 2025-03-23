@@ -83,8 +83,10 @@
             // 
             userPassword.Location = new Point(95, 330);
             userPassword.Name = "userPassword";
+            userPassword.PasswordChar = '*';
             userPassword.Size = new Size(314, 29);
             userPassword.TabIndex = 4;
+            userPassword.UseSystemPasswordChar = true;
             // 
             // label4
             // 
@@ -134,7 +136,7 @@
             Font = new Font("Segoe UI", 12F);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "LoginForm";
             Text = "LoginForm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

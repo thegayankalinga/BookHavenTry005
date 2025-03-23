@@ -131,7 +131,6 @@ namespace BookHavenWinFormUi.PanelForms
             }
         }
 
-
         private async void BookForm_Load(object sender, EventArgs e)
         {
             //MessageBox.Show("Form is loading");

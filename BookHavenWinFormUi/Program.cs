@@ -2,6 +2,10 @@
 using BookHavenClassLibrary.Interfaces;
 using BookHavenClassLibrary.Repositories;
 using BookHavenWinFormUi.PanelForms;
+using BookHavenWinFormUi.PanelForms.Customer;
+using BookHavenWinFormUi.PanelForms.Reports;
+using BookHavenWinFormUi.PanelForms.Supplier;
+using BookHavenWinFormUi.PanelForms.User;
 using BookHavenWinFormUi.Utilz;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -74,6 +78,13 @@ namespace BookHavenWinFormUi
                     services.AddTransient<MainForm>();
                     services.AddTransient<SupplierForm>();
                     services.AddTransient<BookForm>();
+                    services.AddTransient<CustomerForm>();
+                    services.AddTransient<OrderForm>();
+                    services.AddTransient<Report>();
+                    services.AddTransient<UserForm>();
+                    services.AddTransient<SalesForm>();
+                    services.AddTransient<Dashboard>();
+                    
 
                     services.AddSingleton<NavigationService>();
 
