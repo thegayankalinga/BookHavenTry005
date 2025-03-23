@@ -16,7 +16,7 @@ namespace BookHavenClassLibrary.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderItemId { get; set; }
 
-    
+        //One to many relationship
         public int? SupplierOrderId { get; set; }
 
         //Navigation Property

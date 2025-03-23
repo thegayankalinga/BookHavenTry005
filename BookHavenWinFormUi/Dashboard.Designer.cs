@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -55,8 +58,11 @@
             sqlCommand3 = new Microsoft.Data.SqlClient.SqlCommand();
             grpChart = new GroupBox();
             sqlCommand4 = new Microsoft.Data.SqlClient.SqlCommand();
+            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             grpSupplier.SuspendLayout();
             groupBox1.SuspendLayout();
+            grpChart.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -301,6 +307,7 @@
             // 
             // grpChart
             // 
+            grpChart.Controls.Add(chart1);
             grpChart.ForeColor = SystemColors.ButtonHighlight;
             grpChart.Location = new Point(73, 276);
             grpChart.Name = "grpChart";
@@ -313,6 +320,23 @@
             // 
             sqlCommand4.CommandTimeout = 30;
             sqlCommand4.EnableOptimizedParameterBinding = false;
+            // 
+            // chart1
+            // 
+            chart1.BorderlineColor = Color.FromArgb(46, 51, 73);
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chart1.Legends.Add(legend1);
+            chart1.Location = new Point(56, 39);
+            chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chart1.Series.Add(series1);
+            chart1.Size = new Size(776, 343);
+            chart1.TabIndex = 0;
+            chart1.Text = "chart1";
             // 
             // Dashboard
             // 
@@ -339,6 +363,8 @@
             grpSupplier.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            grpChart.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -372,5 +398,6 @@
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand3;
         private GroupBox grpChart;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand4;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

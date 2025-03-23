@@ -42,5 +42,8 @@ namespace BookHavenClassLibrary.Models
         public DateTime CreatedAt { get; set; }
 
         public DateTime LastLoginAt { get; set; }
+
+        //One to many relationship (one side of the relationship)
+        public List<Sales> Sales { get; set; } = new List<Sales>();
     }
 }

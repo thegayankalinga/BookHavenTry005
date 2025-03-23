@@ -26,6 +26,11 @@ namespace BookHavenClassLibrary.Models
         [Required]
         public required OrderStatuses OrderStatuses { get; set; }
 
+        public int CreditPeriod { get; set; }
+
+
+
+        //one side of the relationship
         public List<SupplierOrderItem> SupplierOrderItems { get; set; } = new List<SupplierOrderItem>();
     }
 }

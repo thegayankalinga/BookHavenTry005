@@ -23,6 +23,13 @@ namespace BookHavenClassLibrary.Connections
         public DbSet<SupplierOrder> SupplierOrders { get; set; }
         public DbSet<SupplierOrderItem> SupplierOrderItems { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Sales> Sales { get; set; }
+        public DbSet<SaleItem> SaleItems { get; set; }
+
+        public DbSet<Payment> Payments { get; set; }
+
         //dotnet ef migrations add InitialCreate
         //dotnet ef database update
 

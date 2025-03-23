@@ -29,12 +29,20 @@ namespace BookHavenClassLibrary.Models
    
         [StringLength(50)]
         public string? Isbn { get; set; }
+        public decimal? DiscountPct { get; set; }
 
         [Required]
         public required decimal SellingPrice { get; set; }
-
+        
         [Required]
         public required int StockQuantity { get; set; }
+
+        public DateOnly LastRestockDate { get; set; }
+
+        public int QuantitySold { get; set; }
+
+        //One to many relationship (one side of the relationship)
+        public List<SaleItem> SaleItems { get; set; } = new List<SaleItem>();
 
 
     }
