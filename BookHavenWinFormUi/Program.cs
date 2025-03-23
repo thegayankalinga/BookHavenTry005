@@ -71,6 +71,7 @@ namespace BookHavenWinFormUi
                     services.AddScoped<IBookRepository, BookRepository>();
                     services.AddScoped<ISupplierOrderRepository, SupplierOrderRepository>();
                     services.AddScoped<IUnitOfWork, UnitOfWork>();
+                    services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 
                     //Register Forms

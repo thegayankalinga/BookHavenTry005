@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookHavenClassLibrary.Dtos.Customer
 {
-    public class CustomerReponseDto
+    public class CustomerResponseDto
     {
         public int Id { get; set; }
         public required string FullName { get; set; }

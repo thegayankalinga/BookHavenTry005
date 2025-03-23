@@ -33,7 +33,7 @@ namespace BookHavenWinFormUi.PanelForms
         private void ConfigureBooksGrid()
         {
             var columns = new List<(string Name, DataGridViewAutoSizeColumnMode SizeMode)>
-    {
+             {
                 ("ID", DataGridViewAutoSizeColumnMode.AllCells),
                 ("Title", DataGridViewAutoSizeColumnMode.Fill),
                 ("Author", DataGridViewAutoSizeColumnMode.AllCells),
@@ -41,7 +41,7 @@ namespace BookHavenWinFormUi.PanelForms
                 ("ISBN", DataGridViewAutoSizeColumnMode.AllCells),
                 ("Price", DataGridViewAutoSizeColumnMode.AllCells),
                 ("StockQty", DataGridViewAutoSizeColumnMode.AllCells)
-    };
+            };
 
             DataGridViewUtility.ConfigureGrid(gridViewBookList, columns);
         }
@@ -223,7 +223,7 @@ namespace BookHavenWinFormUi.PanelForms
                     // Save to repository
                     SaveBookAsync(newBook, null);
                 }
-            }
+            }   
 
         }
 

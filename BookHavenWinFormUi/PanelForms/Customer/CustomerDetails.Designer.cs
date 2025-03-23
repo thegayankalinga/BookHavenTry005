@@ -36,11 +36,11 @@
             lblSBN = new Label();
             lblAuthorName = new Label();
             lblBookTitle = new Label();
-            txtCurrentStock = new TextBox();
-            txtSellingPrice = new TextBox();
-            txtISBN = new TextBox();
-            txtAuthorName = new TextBox();
-            txtBookTitle = new TextBox();
+            txtPhoneNumber = new TextBox();
+            txtCity = new TextBox();
+            txtAddressLineTwo = new TextBox();
+            txtAddressLineOne = new TextBox();
+            txtFullName = new TextBox();
             gbBookDetails.SuspendLayout();
             SuspendLayout();
             // 
@@ -53,11 +53,11 @@
             gbBookDetails.Controls.Add(lblSBN);
             gbBookDetails.Controls.Add(lblAuthorName);
             gbBookDetails.Controls.Add(lblBookTitle);
-            gbBookDetails.Controls.Add(txtCurrentStock);
-            gbBookDetails.Controls.Add(txtSellingPrice);
-            gbBookDetails.Controls.Add(txtISBN);
-            gbBookDetails.Controls.Add(txtAuthorName);
-            gbBookDetails.Controls.Add(txtBookTitle);
+            gbBookDetails.Controls.Add(txtPhoneNumber);
+            gbBookDetails.Controls.Add(txtCity);
+            gbBookDetails.Controls.Add(txtAddressLineTwo);
+            gbBookDetails.Controls.Add(txtAddressLineOne);
+            gbBookDetails.Controls.Add(txtFullName);
             gbBookDetails.ForeColor = SystemColors.ButtonHighlight;
             gbBookDetails.Location = new Point(43, 52);
             gbBookDetails.Name = "gbBookDetails";
@@ -136,45 +136,45 @@
             lblBookTitle.TabIndex = 0;
             lblBookTitle.Text = "Customer Name";
             // 
-            // txtCurrentStock
+            // txtPhoneNumber
             // 
-            txtCurrentStock.Location = new Point(176, 283);
-            txtCurrentStock.Margin = new Padding(4);
-            txtCurrentStock.Name = "txtCurrentStock";
-            txtCurrentStock.Size = new Size(323, 29);
-            txtCurrentStock.TabIndex = 1;
+            txtPhoneNumber.Location = new Point(176, 283);
+            txtPhoneNumber.Margin = new Padding(4);
+            txtPhoneNumber.Name = "txtPhoneNumber";
+            txtPhoneNumber.Size = new Size(323, 29);
+            txtPhoneNumber.TabIndex = 1;
             // 
-            // txtSellingPrice
+            // txtCity
             // 
-            txtSellingPrice.Location = new Point(176, 230);
-            txtSellingPrice.Margin = new Padding(4);
-            txtSellingPrice.Name = "txtSellingPrice";
-            txtSellingPrice.Size = new Size(323, 29);
-            txtSellingPrice.TabIndex = 1;
+            txtCity.Location = new Point(176, 230);
+            txtCity.Margin = new Padding(4);
+            txtCity.Name = "txtCity";
+            txtCity.Size = new Size(323, 29);
+            txtCity.TabIndex = 1;
             // 
-            // txtISBN
+            // txtAddressLineTwo
             // 
-            txtISBN.Location = new Point(176, 172);
-            txtISBN.Margin = new Padding(4);
-            txtISBN.Name = "txtISBN";
-            txtISBN.Size = new Size(323, 29);
-            txtISBN.TabIndex = 1;
+            txtAddressLineTwo.Location = new Point(176, 172);
+            txtAddressLineTwo.Margin = new Padding(4);
+            txtAddressLineTwo.Name = "txtAddressLineTwo";
+            txtAddressLineTwo.Size = new Size(323, 29);
+            txtAddressLineTwo.TabIndex = 1;
             // 
-            // txtAuthorName
+            // txtAddressLineOne
             // 
-            txtAuthorName.Location = new Point(176, 113);
-            txtAuthorName.Margin = new Padding(4);
-            txtAuthorName.Name = "txtAuthorName";
-            txtAuthorName.Size = new Size(323, 29);
-            txtAuthorName.TabIndex = 1;
+            txtAddressLineOne.Location = new Point(176, 113);
+            txtAddressLineOne.Margin = new Padding(4);
+            txtAddressLineOne.Name = "txtAddressLineOne";
+            txtAddressLineOne.Size = new Size(323, 29);
+            txtAddressLineOne.TabIndex = 1;
             // 
-            // txtBookTitle
+            // txtFullName
             // 
-            txtBookTitle.Location = new Point(176, 59);
-            txtBookTitle.Margin = new Padding(4);
-            txtBookTitle.Name = "txtBookTitle";
-            txtBookTitle.Size = new Size(323, 29);
-            txtBookTitle.TabIndex = 1;
+            txtFullName.Location = new Point(176, 59);
+            txtFullName.Margin = new Padding(4);
+            txtFullName.Name = "txtFullName";
+            txtFullName.Size = new Size(323, 29);
+            txtFullName.TabIndex = 1;
             // 
             // CustomerDetails
             // 
@@ -184,9 +184,10 @@
             ClientSize = new Size(635, 645);
             Controls.Add(gbBookDetails);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "CustomerDetails";
             Text = "CustomerDetails";
+            Load += CustomerDetails_Load;
             gbBookDetails.ResumeLayout(false);
             gbBookDetails.PerformLayout();
             ResumeLayout(false);
@@ -202,10 +203,10 @@
         private Label lblSBN;
         private Label lblAuthorName;
         private Label lblBookTitle;
-        private TextBox txtCurrentStock;
-        private TextBox txtSellingPrice;
-        private TextBox txtISBN;
-        private TextBox txtAuthorName;
-        private TextBox txtBookTitle;
+        private TextBox txtPhoneNumber;
+        private TextBox txtCity;
+        private TextBox txtAddressLineTwo;
+        private TextBox txtAddressLineOne;
+        private TextBox txtFullName;
     }
 }

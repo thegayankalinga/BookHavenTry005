@@ -65,6 +65,7 @@
             btnEditCustomer.TabIndex = 2;
             btnEditCustomer.Text = "Edit";
             btnEditCustomer.UseVisualStyleBackColor = true;
+            btnEditCustomer.Click += btnEditCustomer_Click;
             // 
             // btnDeleteCustomer
             // 
@@ -75,6 +76,7 @@
             btnDeleteCustomer.TabIndex = 2;
             btnDeleteCustomer.Text = "Delete";
             btnDeleteCustomer.UseVisualStyleBackColor = true;
+            btnDeleteCustomer.Click += btnDeleteCustomer_Click;
             // 
             // btnAddNewCustomer
             // 
@@ -85,6 +87,7 @@
             btnAddNewCustomer.TabIndex = 2;
             btnAddNewCustomer.Text = "Add New";
             btnAddNewCustomer.UseVisualStyleBackColor = true;
+            btnAddNewCustomer.Click += btnAddNewCustomer_Click;
             // 
             // groupBox1
             // 
@@ -119,6 +122,7 @@
             btnSearch.TabIndex = 2;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // txtSearchKey
             // 
@@ -126,6 +130,7 @@
             txtSearchKey.Name = "txtSearchKey";
             txtSearchKey.Size = new Size(211, 29);
             txtSearchKey.TabIndex = 4;
+            txtSearchKey.KeyPress += txtSearchKey_KeyPress_1;
             // 
             // lblSearchKey
             // 
