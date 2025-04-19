@@ -68,6 +68,12 @@ namespace BookHavenClassLibrary.Connections
                 .Property(s => s.UnitPrice)
                 .HasPrecision(18, 2);
 
+            modelBuilder.Entity<Sales>()
+               .HasOne(s => s.User)
+               .WithMany(u => u.Sales)
+               .HasForeignKey(s => s.UserId)
+               .OnDelete(DeleteBehavior.Restrict);
+
         }
 
        

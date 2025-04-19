@@ -9,6 +9,7 @@ namespace BookHavenClassLibrary.Interfaces
 {
     public interface ISupplierOrderRepository
     {
+        
         Task<bool> AddSupplierOrderAsync(SupplierOrderRequestDto supplierOrderRequestDto);
         Task<List<SupplierOrderResponseDto?>> GetAllSupplierOrdersAsync();
         Task<SupplierOrderResponseDto?> GetSupplierOrderByIdAsync(int supplierOrderId);

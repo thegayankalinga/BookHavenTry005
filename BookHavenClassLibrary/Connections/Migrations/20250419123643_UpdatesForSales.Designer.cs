@@ -4,6 +4,7 @@ using BookHavenClassLibrary.Connections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookHavenClassLibrary.Connections.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250419123643_UpdatesForSales")]
+    partial class UpdatesForSales
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,9 +237,6 @@ namespace BookHavenClassLibrary.Connections.Migrations
                     b.Property<int>("SaleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SalesId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Subtotal")
                         .HasColumnType("decimal(18,2)");
 
@@ -247,8 +247,6 @@ namespace BookHavenClassLibrary.Connections.Migrations
                     b.HasKey("SaleItemId");
 
                     b.HasIndex("BookId");
-
-                    b.HasIndex("SalesId");
 
                     b.ToTable("SaleItems");
                 });
@@ -267,8 +265,8 @@ namespace BookHavenClassLibrary.Connections.Migrations
                     b.Property<int>("DeliveryMethod")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("SaleDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("SaleItemId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -277,6 +275,10 @@ namespace BookHavenClassLibrary.Connections.Migrations
                     b.HasKey("SalesId");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("SaleItemId")
+                        .IsUnique()
+                        .HasFilter("[SaleItemId] IS NOT NULL");
 
                     b.HasIndex("UserId");
 
@@ -517,13 +519,7 @@ namespace BookHavenClassLibrary.Connections.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BookHavenClassLibrary.Models.Sales", "Sales")
-                        .WithMany("SaleItems")
-                        .HasForeignKey("SalesId");
-
                     b.Navigation("Book");
-
-                    b.Navigation("Sales");
                 });
 
             modelBuilder.Entity("BookHavenClassLibrary.Models.Sales", b =>
@@ -534,13 +530,19 @@ namespace BookHavenClassLibrary.Connections.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BookHavenClassLibrary.Models.SaleItem", "SaleItem")
+                        .WithOne("Sales")
+                        .HasForeignKey("BookHavenClassLibrary.Models.Sales", "SaleItemId");
+
                     b.HasOne("BookHavenClassLibrary.Models.AppUser", "User")
                         .WithMany("Sales")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Customer");
+
+                    b.Navigation("SaleItem");
 
                     b.Navigation("User");
                 });
@@ -620,9 +622,9 @@ namespace BookHavenClassLibrary.Connections.Migrations
                     b.Navigation("Sales");
                 });
 
-            modelBuilder.Entity("BookHavenClassLibrary.Models.Sales", b =>
+            modelBuilder.Entity("BookHavenClassLibrary.Models.SaleItem", b =>
                 {
-                    b.Navigation("SaleItems");
+                    b.Navigation("Sales");
                 });
 
             modelBuilder.Entity("BookHavenClassLibrary.Models.SupplierOrder", b =>

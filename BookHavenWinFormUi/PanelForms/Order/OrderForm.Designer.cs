@@ -190,6 +190,13 @@
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
             groupBox2.Text = "Actions";
+
+            this.btnEditBook.Click += new System.EventHandler(this.btnEditBook_Click);
+            this.btnDeleteBook.Click += new System.EventHandler(this.btnDeleteBook_Click);
+            this.btnAddNewBook.Click += new System.EventHandler(this.btnAddNewBook_Click);
+            this.txtSearchKey.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearchKey_KeyPress);
+            this.btnResetFilter.Click += new System.EventHandler(this.btnResetFilter_Click);
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // OrderForm
             // 

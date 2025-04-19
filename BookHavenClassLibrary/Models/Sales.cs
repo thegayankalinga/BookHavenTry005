@@ -15,18 +15,26 @@ namespace BookHavenClassLibrary.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int SalesId { get; set; }
 
-        //One to many relationship
-        public int? CustomerId { get; set; }
-        public Customer? Customer { get; set; }//Navigation Property
+        // Customer Relationship (Required)
+        public int CustomerId { get; set; }
 
-        public int? SaleItemId { get; set; }
-        public SaleItem? SaleItem { get; set; }//Navigation Property    
+        [ForeignKey(nameof(CustomerId))]
+        [InverseProperty(nameof(Customer.Sales))]
+        public Customer Customer { get; set; } = null!;
 
-        public int UserId { get; set; }
-        public AppUser? User { get; set; }//Navigation Property
+        // User Relationship (Required, assuming AppUser is your custom user model)
+        public string UserId { get; set; } = null!;
+
+        [ForeignKey(nameof(UserId))]
+        public AppUser User { get; set; } = null!;
+
+        // Optional: SaleItem - but logically this should be a collection
+        public List<SaleItem> SaleItems { get; set; } = new();
 
         public DeliveryMethods DeliveryMethod { get; set; }
-        
+
+        public DateTime SaleDate { get; set; } = DateTime.Now;
+
 
     }
 }

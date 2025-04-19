@@ -73,13 +73,15 @@ namespace BookHavenWinFormUi
                     //services.AddSingleton<IRepository, Repository>();
 
 
-                    services.AddScoped<IUserSessionService, UserSessionService>();
+                    services.AddSingleton<IUserSessionService, UserSessionService>();
                     services.AddScoped<IUserRepository, UserRepository>();
                     services.AddScoped<ISupplierRepository, SupplierRepository>();
                     services.AddScoped<IBookRepository, BookRepository>();
                     services.AddScoped<ISupplierOrderRepository, SupplierOrderRepository>();
                     services.AddScoped<IUnitOfWork, UnitOfWork>();
                     services.AddScoped<ICustomerRepository, CustomerRepository>();
+                    services.AddScoped<ISaleItemRepository, SaleItemRepository>();
+                    services.AddScoped<ISalesRepository, SalesRepository>();
 
 
                     //Register Forms

@@ -26,6 +26,7 @@ namespace BookHavenClassLibrary.Models
         public required string City { get; set; }
 
         //One to many relationship (one side of the relationship)
+        [InverseProperty("Customer")]
         public List<Sales> Sales { get; set; } = new List<Sales>();
 
     }

@@ -29,32 +29,36 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            label5 = new Label();
+            cboReportType = new ComboBox();
+            dtToDate = new DateTimePicker();
+            dtFromDate = new DateTimePicker();
             lblGenre = new Label();
             lblAuthor = new Label();
-            cmbGenre = new ComboBox();
+            cboUser = new ComboBox();
             btnResetFilter = new Button();
             btnSearch = new Button();
             lblSearchKey = new Label();
-            gridViewBookList = new DataGridView();
+            dgvReportData = new DataGridView();
             groupBox2 = new GroupBox();
-            label1 = new Label();
-            label2 = new Label();
+            lblTotalValue = new Label();
             label3 = new Label();
-            label4 = new Label();
-            dateTimePicker1 = new DateTimePicker();
-            dateTimePicker2 = new DateTimePicker();
+            lblNoOfItems = new Label();
+            label1 = new Label();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridViewBookList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReportData).BeginInit();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(dateTimePicker2);
-            groupBox1.Controls.Add(dateTimePicker1);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(cboReportType);
+            groupBox1.Controls.Add(dtToDate);
+            groupBox1.Controls.Add(dtFromDate);
             groupBox1.Controls.Add(lblGenre);
             groupBox1.Controls.Add(lblAuthor);
-            groupBox1.Controls.Add(cmbGenre);
+            groupBox1.Controls.Add(cboUser);
             groupBox1.Controls.Add(btnResetFilter);
             groupBox1.Controls.Add(btnSearch);
             groupBox1.Controls.Add(lblSearchKey);
@@ -66,11 +70,43 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Filter";
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.ForeColor = SystemColors.ButtonHighlight;
+            label5.Location = new Point(6, 91);
+            label5.Name = "label5";
+            label5.Size = new Size(93, 21);
+            label5.TabIndex = 9;
+            label5.Text = "Report Type";
+            // 
+            // cboReportType
+            // 
+            cboReportType.FormattingEnabled = true;
+            cboReportType.Location = new Point(113, 90);
+            cboReportType.Name = "cboReportType";
+            cboReportType.Size = new Size(246, 29);
+            cboReportType.TabIndex = 8;
+            // 
+            // dtToDate
+            // 
+            dtToDate.Location = new Point(527, 33);
+            dtToDate.Name = "dtToDate";
+            dtToDate.Size = new Size(282, 29);
+            dtToDate.TabIndex = 7;
+            // 
+            // dtFromDate
+            // 
+            dtFromDate.Location = new Point(103, 33);
+            dtFromDate.Name = "dtFromDate";
+            dtFromDate.Size = new Size(294, 29);
+            dtFromDate.TabIndex = 7;
+            // 
             // lblGenre
             // 
             lblGenre.AutoSize = true;
             lblGenre.ForeColor = SystemColors.ButtonHighlight;
-            lblGenre.Location = new Point(643, 33);
+            lblGenre.Location = new Point(380, 93);
             lblGenre.Name = "lblGenre";
             lblGenre.Size = new Size(42, 21);
             lblGenre.TabIndex = 6;
@@ -80,19 +116,19 @@
             // 
             lblAuthor.AutoSize = true;
             lblAuthor.ForeColor = SystemColors.ButtonHighlight;
-            lblAuthor.Location = new Point(333, 33);
+            lblAuthor.Location = new Point(428, 38);
             lblAuthor.Name = "lblAuthor";
             lblAuthor.Size = new Size(61, 21);
             lblAuthor.TabIndex = 6;
             lblAuthor.Text = "To Date";
             // 
-            // cmbGenre
+            // cboUser
             // 
-            cmbGenre.FormattingEnabled = true;
-            cmbGenre.Location = new Point(713, 30);
-            cmbGenre.Name = "cmbGenre";
-            cmbGenre.Size = new Size(183, 29);
-            cmbGenre.TabIndex = 5;
+            cboUser.FormattingEnabled = true;
+            cboUser.Location = new Point(428, 90);
+            cboUser.Name = "cboUser";
+            cboUser.Size = new Size(183, 29);
+            cboUser.TabIndex = 5;
             // 
             // btnResetFilter
             // 
@@ -113,32 +149,33 @@
             btnSearch.TabIndex = 2;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // lblSearchKey
             // 
             lblSearchKey.AutoSize = true;
             lblSearchKey.ForeColor = SystemColors.ButtonHighlight;
-            lblSearchKey.Location = new Point(14, 33);
+            lblSearchKey.Location = new Point(6, 38);
             lblSearchKey.Name = "lblSearchKey";
             lblSearchKey.Size = new Size(83, 21);
             lblSearchKey.TabIndex = 3;
             lblSearchKey.Text = "From Date";
             // 
-            // gridViewBookList
+            // dgvReportData
             // 
-            gridViewBookList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridViewBookList.Location = new Point(74, 175);
-            gridViewBookList.MultiSelect = false;
-            gridViewBookList.Name = "gridViewBookList";
-            gridViewBookList.RowHeadersVisible = false;
-            gridViewBookList.Size = new Size(922, 424);
-            gridViewBookList.TabIndex = 8;
+            dgvReportData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReportData.Location = new Point(74, 175);
+            dgvReportData.MultiSelect = false;
+            dgvReportData.Name = "dgvReportData";
+            dgvReportData.RowHeadersVisible = false;
+            dgvReportData.Size = new Size(922, 424);
+            dgvReportData.TabIndex = 8;
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(label4);
+            groupBox2.Controls.Add(lblTotalValue);
             groupBox2.Controls.Add(label3);
-            groupBox2.Controls.Add(label2);
+            groupBox2.Controls.Add(lblNoOfItems);
             groupBox2.Controls.Add(label1);
             groupBox2.ForeColor = SystemColors.ButtonHighlight;
             groupBox2.Location = new Point(74, 620);
@@ -148,23 +185,14 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Total Value";
             // 
-            // label1
+            // lblTotalValue
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(14, 34);
-            label1.Name = "label1";
-            label1.Size = new Size(91, 21);
-            label1.TabIndex = 0;
-            label1.Text = "No of Items";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(140, 34);
-            label2.Name = "label2";
-            label2.Size = new Size(19, 21);
-            label2.TabIndex = 0;
-            label2.Text = "0";
+            lblTotalValue.AutoSize = true;
+            lblTotalValue.Location = new Point(367, 34);
+            lblTotalValue.Name = "lblTotalValue";
+            lblTotalValue.Size = new Size(40, 21);
+            lblTotalValue.TabIndex = 0;
+            lblTotalValue.Text = "0.00";
             // 
             // label3
             // 
@@ -175,28 +203,23 @@
             label3.TabIndex = 0;
             label3.Text = "Total Value";
             // 
-            // label4
+            // lblNoOfItems
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(367, 34);
-            label4.Name = "label4";
-            label4.Size = new Size(40, 21);
-            label4.TabIndex = 0;
-            label4.Text = "0.00";
+            lblNoOfItems.AutoSize = true;
+            lblNoOfItems.Location = new Point(140, 34);
+            lblNoOfItems.Name = "lblNoOfItems";
+            lblNoOfItems.Size = new Size(19, 21);
+            lblNoOfItems.TabIndex = 0;
+            lblNoOfItems.Text = "0";
             // 
-            // dateTimePicker1
+            // label1
             // 
-            dateTimePicker1.Location = new Point(103, 33);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(212, 29);
-            dateTimePicker1.TabIndex = 7;
-            // 
-            // dateTimePicker2
-            // 
-            dateTimePicker2.Location = new Point(411, 33);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(200, 29);
-            dateTimePicker2.TabIndex = 7;
+            label1.AutoSize = true;
+            label1.Location = new Point(14, 34);
+            label1.Name = "label1";
+            label1.Size = new Size(91, 21);
+            label1.TabIndex = 0;
+            label1.Text = "No of Items";
             // 
             // Report
             // 
@@ -206,16 +229,16 @@
             ClientSize = new Size(1062, 720);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
-            Controls.Add(gridViewBookList);
+            Controls.Add(dgvReportData);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Report";
             Text = "Report";
             Load += Report_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gridViewBookList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvReportData).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ResumeLayout(false);
@@ -226,17 +249,19 @@
         private GroupBox groupBox1;
         private Label lblGenre;
         private Label lblAuthor;
-        private ComboBox cmbGenre;
+        private ComboBox cboUser;
         private Button btnResetFilter;
         private Button btnSearch;
         private Label lblSearchKey;
-        private DataGridView gridViewBookList;
-        private DateTimePicker dateTimePicker2;
-        private DateTimePicker dateTimePicker1;
+        private DataGridView dgvReportData;
+        private DateTimePicker dtToDate;
+        private DateTimePicker dtFromDate;
         private GroupBox groupBox2;
-        private Label label4;
+        private Label lblTotalValue;
         private Label label3;
-        private Label label2;
+        private Label lblNoOfItems;
         private Label label1;
+        private ComboBox cboReportType;
+        private Label label5;
     }
 }

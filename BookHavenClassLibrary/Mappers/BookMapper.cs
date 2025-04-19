@@ -22,7 +22,8 @@ namespace BookHavenClassLibrary.Mappers
                 BookGenre = book.BookGenre,
                 Isbn = book.Isbn,
                 SellingPrice = book.SellingPrice,
-                StockQuantity = book.StockQuantity
+                StockQuantity = book.StockQuantity,
+                QuanitySold = book.QuantitySold
             };
         }
 

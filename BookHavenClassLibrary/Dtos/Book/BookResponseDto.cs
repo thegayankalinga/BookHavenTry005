@@ -16,5 +16,7 @@ namespace BookHavenClassLibrary.Dtos.Book
         public string? Isbn { get; set; }
         public required decimal SellingPrice { get; set; }
         public required int StockQuantity { get; set; }
+
+        public int? QuanitySold { get; set; }
     }
 }

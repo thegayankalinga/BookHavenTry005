@@ -32,5 +32,8 @@ namespace BookHavenClassLibrary.Models
 
         //one side of the relationship
         public List<SupplierOrderItem> SupplierOrderItems { get; set; } = new List<SupplierOrderItem>();
+        
+        [ForeignKey(nameof(SupplierId))]
+        public Supplier Supplier { get; set; } = null!;
     }
 }
