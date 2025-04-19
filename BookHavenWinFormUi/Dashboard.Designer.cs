@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -46,6 +43,7 @@
             label10 = new Label();
             label9 = new Label();
             groupBox1 = new GroupBox();
+            label20 = new Label();
             label14 = new Label();
             label15 = new Label();
             label16 = new Label();
@@ -57,12 +55,11 @@
             sqlCommand2 = new Microsoft.Data.SqlClient.SqlCommand();
             sqlCommand3 = new Microsoft.Data.SqlClient.SqlCommand();
             grpChart = new GroupBox();
+            formsPlot1 = new ScottPlot.WinForms.FormsPlot();
             sqlCommand4 = new Microsoft.Data.SqlClient.SqlCommand();
-            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             grpSupplier.SuspendLayout();
             groupBox1.SuspendLayout();
             grpChart.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -172,7 +169,7 @@
             label12.Name = "label12";
             label12.Size = new Size(129, 21);
             label12.TabIndex = 0;
-            label12.Text = "Totla Order Value";
+            label12.Text = "Total Order Value";
             // 
             // label11
             // 
@@ -206,6 +203,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label20);
             groupBox1.Controls.Add(label14);
             groupBox1.Controls.Add(label15);
             groupBox1.Controls.Add(label16);
@@ -219,6 +217,15 @@
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Sales Details";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(202, 51);
+            label20.Name = "label20";
+            label20.Size = new Size(19, 21);
+            label20.TabIndex = 2;
+            label20.Text = "0";
             // 
             // label14
             // 
@@ -262,14 +269,10 @@
             // 
             // label18
             // 
-            label18.AutoSize = true;
-            label18.ForeColor = SystemColors.ButtonHighlight;
-            label18.Location = new Point(202, 51);
+            label18.Location = new Point(0, 0);
             label18.Name = "label18";
-            label18.Size = new Size(19, 21);
-            label18.TabIndex = 0;
-            label18.Text = "0";
-            label18.Click += label18_Click;
+            label18.Size = new Size(100, 23);
+            label18.TabIndex = 1;
             // 
             // label19
             // 
@@ -307,7 +310,7 @@
             // 
             // grpChart
             // 
-            grpChart.Controls.Add(chart1);
+            grpChart.Controls.Add(formsPlot1);
             grpChart.ForeColor = SystemColors.ButtonHighlight;
             grpChart.Location = new Point(73, 276);
             grpChart.Name = "grpChart";
@@ -316,27 +319,18 @@
             grpChart.TabStop = false;
             grpChart.Text = "Sales Chart";
             // 
+            // formsPlot1
+            // 
+            formsPlot1.DisplayScale = 1F;
+            formsPlot1.Location = new Point(39, 28);
+            formsPlot1.Name = "formsPlot1";
+            formsPlot1.Size = new Size(809, 362);
+            formsPlot1.TabIndex = 0;
+            // 
             // sqlCommand4
             // 
             sqlCommand4.CommandTimeout = 30;
             sqlCommand4.EnableOptimizedParameterBinding = false;
-            // 
-            // chart1
-            // 
-            chart1.BorderlineColor = Color.FromArgb(46, 51, 73);
-            chartArea1.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chart1.Legends.Add(legend1);
-            chart1.Location = new Point(56, 39);
-            chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chart1.Series.Add(series1);
-            chart1.Size = new Size(776, 343);
-            chart1.TabIndex = 0;
-            chart1.Text = "chart1";
             // 
             // Dashboard
             // 
@@ -359,12 +353,12 @@
             Margin = new Padding(4);
             Name = "Dashboard";
             Text = "Dashboard";
+            Load += Dashboard_Load_1;
             grpSupplier.ResumeLayout(false);
             grpSupplier.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             grpChart.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -398,6 +392,7 @@
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand3;
         private GroupBox grpChart;
         private Microsoft.Data.SqlClient.SqlCommand sqlCommand4;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private ScottPlot.WinForms.FormsPlot formsPlot1;
+        private Label label20;
     }
 }

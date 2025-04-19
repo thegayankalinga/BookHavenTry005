@@ -25,9 +25,9 @@ namespace BookHavenClassLibrary.Mappers
                 UserId = sales.UserId,
                 User = sales.User != null ? UserMapper.MapToUserResponseDto(sales.User) : null,
                 DeliveryMethod = sales.DeliveryMethod,
-                SaleDate = DateTime.Now, // This should come from the database if available
-                TotalAmount = 0, // This would be calculated from SaleItems
-                SaleItems = new List<SaleItemResponseDto>() // This would be populated separately
+                SaleDate = sales.SaleDate,
+                SaleItems = sales.SaleItems.Select(SalesItemMapper.MapToResponseDto).ToList(),
+                TotalAmount = sales.SaleItems.Sum(i => i.Subtotal)
             };
         }
 

@@ -14,19 +14,22 @@ namespace BookHavenClassLibrary.Mappers
         {
             if (order == null) throw new ArgumentNullException(nameof(order));
 
+            var orderItems = order.SupplierOrderItems.Select(item => new SupplierOrderItemResponseDto
+            {
+                OrderItemId = item.OrderItemId,
+                BookId = item.BookId,
+                Quantity = item.Quantity,
+                UnitPrice = item.UnitPrice
+            }).ToList();
+
             return new SupplierOrderResponseDto
             {
                 SupplierOrderId = order.SupplierOrderId,
                 SupplierId = order.SupplierId,
                 OrderDate = order.OrderDate,
                 OrderStatuses = order.OrderStatuses,
-                OrderItems = order.SupplierOrderItems.Select(item => new SupplierOrderItemResponseDto
-                {
-                    OrderItemId = item.OrderItemId,
-                    BookId = item.BookId,
-                    Quantity = item.Quantity,
-                    UnitPrice = item.UnitPrice
-                }).ToList()
+                OrderItems = orderItems,
+                TotalPrice = orderItems.Sum(item => item.Quantity * item.UnitPrice) // Calculate total here
             };
         }
 

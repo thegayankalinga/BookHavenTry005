@@ -16,8 +16,8 @@ namespace BookHavenClassLibrary.Dtos.Supplier
 
         //Mapped properties from foreign key relationships
         public required List<SupplierOrderItemResponseDto> OrderItems { get; set; }
+        public decimal TotalPrice { get; set; }
 
         //Calculated Fields
-        public decimal TotalPrice => OrderItems.Sum(item => item.Quantity * item.UnitPrice);
     }
 }
