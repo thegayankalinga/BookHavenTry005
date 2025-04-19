@@ -23,7 +23,7 @@ namespace BookHavenWinFormUi
 
             //TODO: remove for production
             userEmail.Text = "admin@bookhaven.com";
-            userPassword.Text = "test123";
+            userPassword.Text = "Test@123";
             _serviceProvider = serviceProvider;
             _sessionService = sessionService;
         }

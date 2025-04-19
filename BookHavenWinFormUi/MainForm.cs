@@ -246,7 +246,14 @@ namespace BookHavenWinFormUi
         {
             btnSupplier.Visible = _userSessionService.HasPermission(BookHavenClassLibrary.Enumz.UserRoleType.Admin);
             btnUsers.Visible = _userSessionService.HasPermission(BookHavenClassLibrary.Enumz.UserRoleType.Admin);
-            //TODO: remaining matrix.
+            btnSupplierOrder.Visible = _userSessionService.HasPermission(BookHavenClassLibrary.Enumz.UserRoleType.Admin);
+
+            btnBooks.Visible = _userSessionService.HasPermission(BookHavenClassLibrary.Enumz.UserRoleType.Admin)
+            || _userSessionService.HasPermission(BookHavenClassLibrary.Enumz.UserRoleType.Sales);
+
+            btnReport.Visible = _userSessionService.HasPermission(BookHavenClassLibrary.Enumz.UserRoleType.Admin)
+            || _userSessionService.HasPermission(BookHavenClassLibrary.Enumz.UserRoleType.Sales);
+
 
         }
 

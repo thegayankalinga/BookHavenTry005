@@ -213,17 +213,16 @@ namespace BookHavenWinFormUi.PanelForms
 
         private async void btnSaveBook_Click(object sender, EventArgs e)
         {
-            using (var bookDialog = new BookDetailsDialog())
+            using (var dialog = new BookDetailsDialog())
             {
-                if (bookDialog.ShowDialog() == DialogResult.OK)
+                dialog.OnBookAdded += async (book) =>
                 {
-                    // Get the book data from the dialog
-                    BookRequestDto newBook = bookDialog.BookData;
+                    await _bookRepository.AddBookAsync(book);
+                    await LoadBooksAsync();
+                };
 
-                    // Save to repository
-                    SaveBookAsync(newBook, null);
-                }
-            }   
+                dialog.ShowDialog();
+            }
 
         }
 

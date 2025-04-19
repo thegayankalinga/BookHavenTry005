@@ -13,7 +13,16 @@ namespace BookHavenClassLibrary.Connections
             var basePath = Directory.GetCurrentDirectory();
             var config = new ConfigurationBuilder()
                 .SetBasePath(basePath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                //var basePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "BookHavenClassLibrary"); -> if the appsettings.json is in the class library
+
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true) //remember in the ui project csproj file this should be set to output like below
+                /*
+                  <ItemGroup>
+                        <None Update="appsettings.json">
+                            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+                        </None>
+                </ItemGroup>
+                 */
                 .AddEnvironmentVariables()
                 .Build();
 

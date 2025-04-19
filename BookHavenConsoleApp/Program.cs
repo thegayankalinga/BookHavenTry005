@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 
 
@@ -17,14 +18,33 @@ namespace SeedDataConsole
         static async Task Main(string[] args)
         {
             var configuration = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", optional: true)
-    .AddEnvironmentVariables()
-    .Build();
+                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "..", "BookHavenWinFormUi")) // 👈 Load config from WinForm UI
+                .AddJsonFile("appsettings.json", optional: false)
+                .AddEnvironmentVariables()
+                .Build();
+
             Console.WriteLine("Starting data seeding...");
 
             // Create service collection
             var services = new ServiceCollection();
+
+            // ✅ Logging (required for RoleManager/UserManager)
+            services.AddLogging(builder =>
+            {
+                builder.AddConsole();
+                builder.SetMinimumLevel(LogLevel.Information);
+            });
+
+            var connStr = configuration.GetConnectionString("DefaultConnection");
+
+            if (string.IsNullOrWhiteSpace(connStr))
+            {
+                Console.WriteLine("❌ Connection string not found. Check appsettings.json path or content.");
+                return;
+            }
+
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connStr));
 
             // Add DbContext
             services.AddDbContext<AppDbContext>(options =>
@@ -32,12 +52,12 @@ namespace SeedDataConsole
 
             // Add Identity
             services.AddIdentity<AppUser, IdentityRole>()
-    .AddEntityFrameworkStores<AppDbContext>()
-    .AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
             // Build service provider
             var serviceProvider = services.BuildServiceProvider();
-
+            Console.WriteLine("Connection: " + configuration.GetConnectionString("DefaultConnection"));
             // Call our own seed method
             await SeedUsersAndRolesAsync(serviceProvider);
 
@@ -90,7 +110,7 @@ namespace SeedDataConsole
                         CreatedAt = DateTime.Now,
                         LastLoginAt = DateTime.Now
                     };
-                    await userManager.CreateAsync(newAdminUser, "test123");
+                    await userManager.CreateAsync(newAdminUser, "Test@123");
                     await userManager.AddToRoleAsync(newAdminUser, "Admin");
                 }
             }
@@ -113,7 +133,7 @@ namespace SeedDataConsole
                         CreatedAt = DateTime.Now,
                         LastLoginAt = DateTime.Now
                     };
-                    await userManager.CreateAsync(salesUser, "test123");
+                    await userManager.CreateAsync(salesUser, "Test@123");
                     await userManager.AddToRoleAsync(salesUser, "Sales");
                 }
             }
@@ -136,7 +156,7 @@ namespace SeedDataConsole
                         CreatedAt = DateTime.Now,
                         LastLoginAt = DateTime.Now
                     };
-                    await userManager.CreateAsync(clerkUser, "test123");
+                    await userManager.CreateAsync(clerkUser, "Test@123");
                     await userManager.AddToRoleAsync(clerkUser, "Clerk");
                 }
             }

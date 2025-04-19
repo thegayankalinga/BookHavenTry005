@@ -35,11 +35,11 @@
             txtSearchKey = new TextBox();
             lblSearchKey = new Label();
             groupBox1 = new GroupBox();
+            cmbUserTypes = new ComboBox();
+            lblUserTypes = new Label();
             btnResetFilter = new Button();
             btnSearch = new Button();
             groupBox2 = new GroupBox();
-            lblUserTypes = new Label();
-            cmbUserTypes = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)gridViewUserList).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -61,7 +61,7 @@
             btnEditUser.Location = new Point(172, 41);
             btnEditUser.Name = "btnEditUser";
             btnEditUser.Size = new Size(123, 40);
-            btnEditUser.TabIndex = 2;
+            btnEditUser.TabIndex = 6;
             btnEditUser.Text = "Edit";
             btnEditUser.UseVisualStyleBackColor = true;
             btnEditUser.Click += btnEditUser_Click;
@@ -72,7 +72,7 @@
             btnDeleteUser.Location = new Point(328, 41);
             btnDeleteUser.Name = "btnDeleteUser";
             btnDeleteUser.Size = new Size(123, 40);
-            btnDeleteUser.TabIndex = 2;
+            btnDeleteUser.TabIndex = 7;
             btnDeleteUser.Text = "Delete";
             btnDeleteUser.UseVisualStyleBackColor = true;
             btnDeleteUser.Click += btnDeleteUser_Click;
@@ -83,7 +83,7 @@
             btnAddNewUser.Location = new Point(21, 41);
             btnAddNewUser.Name = "btnAddNewUser";
             btnAddNewUser.Size = new Size(123, 40);
-            btnAddNewUser.TabIndex = 2;
+            btnAddNewUser.TabIndex = 5;
             btnAddNewUser.Text = "Add New";
             btnAddNewUser.UseVisualStyleBackColor = true;
             btnAddNewUser.Click += btnAddNewUser_Click;
@@ -93,7 +93,7 @@
             txtSearchKey.Location = new Point(94, 30);
             txtSearchKey.Name = "txtSearchKey";
             txtSearchKey.Size = new Size(211, 29);
-            txtSearchKey.TabIndex = 4;
+            txtSearchKey.TabIndex = 1;
             txtSearchKey.KeyPress += txtSearchKey_KeyPress;
             // 
             // lblSearchKey
@@ -122,13 +122,32 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Filter";
             // 
+            // cmbUserTypes
+            // 
+            cmbUserTypes.ForeColor = SystemColors.ActiveCaptionText;
+            cmbUserTypes.FormattingEnabled = true;
+            cmbUserTypes.Location = new Point(491, 30);
+            cmbUserTypes.Name = "cmbUserTypes";
+            cmbUserTypes.Size = new Size(210, 29);
+            cmbUserTypes.TabIndex = 2;
+            // 
+            // lblUserTypes
+            // 
+            lblUserTypes.AutoSize = true;
+            lblUserTypes.ForeColor = SystemColors.ButtonHighlight;
+            lblUserTypes.Location = new Point(390, 33);
+            lblUserTypes.Name = "lblUserTypes";
+            lblUserTypes.Size = new Size(78, 21);
+            lblUserTypes.TabIndex = 5;
+            lblUserTypes.Text = "User Type";
+            // 
             // btnResetFilter
             // 
             btnResetFilter.ForeColor = SystemColors.ActiveCaptionText;
             btnResetFilter.Location = new Point(634, 83);
             btnResetFilter.Name = "btnResetFilter";
             btnResetFilter.Size = new Size(123, 40);
-            btnResetFilter.TabIndex = 2;
+            btnResetFilter.TabIndex = 4;
             btnResetFilter.Text = "Reset";
             btnResetFilter.UseVisualStyleBackColor = true;
             btnResetFilter.Click += btnResetFilter_Click;
@@ -139,7 +158,7 @@
             btnSearch.Location = new Point(773, 83);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(123, 40);
-            btnSearch.TabIndex = 2;
+            btnSearch.TabIndex = 3;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
@@ -156,25 +175,6 @@
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
             groupBox2.Text = "Actions";
-            // 
-            // lblUserTypes
-            // 
-            lblUserTypes.AutoSize = true;
-            lblUserTypes.ForeColor = SystemColors.ButtonHighlight;
-            lblUserTypes.Location = new Point(390, 33);
-            lblUserTypes.Name = "lblUserTypes";
-            lblUserTypes.Size = new Size(78, 21);
-            lblUserTypes.TabIndex = 5;
-            lblUserTypes.Text = "User Type";
-            // 
-            // cmbUserTypes
-            // 
-            cmbUserTypes.ForeColor = SystemColors.ActiveCaptionText;
-            cmbUserTypes.FormattingEnabled = true;
-            cmbUserTypes.Location = new Point(491, 30);
-            cmbUserTypes.Name = "cmbUserTypes";
-            cmbUserTypes.Size = new Size(210, 29);
-            cmbUserTypes.TabIndex = 6;
             // 
             // UserForm
             // 

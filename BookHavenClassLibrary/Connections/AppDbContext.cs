@@ -2,10 +2,12 @@
 using BookHavenClassLibrary.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Configuration;
 
 using System.Security.Cryptography;
 using System.Text;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace BookHavenClassLibrary.Connections
@@ -36,14 +38,36 @@ namespace BookHavenClassLibrary.Connections
         public DbSet<Payment> Payments { get; set; }
 
         //dotnet ef migrations add InitialCreate
-        //dotnet ef database update
+        /* -> dotnet ef migrations add InitialMigration --project ../BookHavenClassLibrary --startup-project . --output-dir Connections/Migrations
 
+
+        dotnet ef migrations add InitialMigration \
+            --project BookHavenClassLibrary \
+            --startup-project BookHavenWinFormUi \
+            --output-dir Connections/Migrations
+
+       
+        //dotnet ef database update
+        dotnet ef database update --project ../BookHavenClassLibrary --startup-project .
+
+        dotnet ef database update --project BookHavenClassLibrary --startup-project BookHavenWinFormUi
+
+        dotnet ef database update \
+            --project BookHavenClassLibrary \
+            --startup-project BookHavenWinFormUi
+         */
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Book>()
+                .Property(b => b.SellingPrice)
+                .HasPrecision(18, 2);
 
-            
+            modelBuilder.Entity<SaleItem>()
+                .Property(s => s.UnitPrice)
+                .HasPrecision(18, 2);
+
         }
 
        

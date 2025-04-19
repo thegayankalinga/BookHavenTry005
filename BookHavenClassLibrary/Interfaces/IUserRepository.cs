@@ -15,7 +15,7 @@ namespace BookHavenClassLibrary.Interfaces
         Task<bool> ChangePasswordAsync(string id, string currentPassword, string newPassword);
         Task<List<UserResponseDto?>> GetAllAsync();
         Task<UserResponseDto?> GetByIdAsync(string id);
-        Task<bool> UpdateAsync(string id, RegistrationRequestDto request);
+        Task<bool> UpdateAsync(string id, UpdateRequestDto request);
         Task<bool> DeleteAsync(string id);
         Task<bool> ExistsAsync(string id);
     }

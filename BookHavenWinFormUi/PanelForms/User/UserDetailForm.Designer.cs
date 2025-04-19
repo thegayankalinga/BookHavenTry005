@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             gbBookDetails = new GroupBox();
+            cbAddAnother = new CheckBox();
             btnSave = new Button();
             btnCancel = new Button();
             cmbUserTypes = new ComboBox();
@@ -48,6 +49,7 @@
             // 
             // gbBookDetails
             // 
+            gbBookDetails.Controls.Add(cbAddAnother);
             gbBookDetails.Controls.Add(btnSave);
             gbBookDetails.Controls.Add(btnCancel);
             gbBookDetails.Controls.Add(cmbUserTypes);
@@ -70,13 +72,23 @@
             gbBookDetails.TabStop = false;
             gbBookDetails.Text = "User Details";
             // 
+            // cbAddAnother
+            // 
+            cbAddAnother.AutoSize = true;
+            cbAddAnother.Location = new Point(382, 431);
+            cbAddAnother.Name = "cbAddAnother";
+            cbAddAnother.Size = new Size(117, 25);
+            cbAddAnother.TabIndex = 6;
+            cbAddAnother.Text = "Add Another";
+            cbAddAnother.UseVisualStyleBackColor = true;
+            // 
             // btnSave
             // 
             btnSave.ForeColor = SystemColors.ActiveCaptionText;
             btnSave.Location = new Point(359, 477);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(140, 47);
-            btnSave.TabIndex = 4;
+            btnSave.TabIndex = 7;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
@@ -87,22 +99,22 @@
             btnCancel.Location = new Point(190, 477);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(140, 47);
-            btnCancel.TabIndex = 4;
+            btnCancel.TabIndex = 8;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
             // cmbUserTypes
             // 
             cmbUserTypes.FormattingEnabled = true;
-            cmbUserTypes.Location = new Point(176, 338);
+            cmbUserTypes.Location = new Point(176, 279);
             cmbUserTypes.Name = "cmbUserTypes";
             cmbUserTypes.Size = new Size(323, 29);
-            cmbUserTypes.TabIndex = 3;
+            cmbUserTypes.TabIndex = 5;
             // 
             // lblUserType
             // 
             lblUserType.AutoSize = true;
-            lblUserType.Location = new Point(35, 341);
+            lblUserType.Location = new Point(35, 282);
             lblUserType.Margin = new Padding(4, 0, 4, 0);
             lblUserType.Name = "lblUserType";
             lblUserType.Size = new Size(78, 21);
@@ -112,7 +124,7 @@
             // lblLastName
             // 
             lblLastName.AutoSize = true;
-            lblLastName.Location = new Point(35, 286);
+            lblLastName.Location = new Point(35, 227);
             lblLastName.Margin = new Padding(4, 0, 4, 0);
             lblLastName.Name = "lblLastName";
             lblLastName.Size = new Size(84, 21);
@@ -122,7 +134,7 @@
             // lblFirstName
             // 
             lblFirstName.AutoSize = true;
-            lblFirstName.Location = new Point(35, 233);
+            lblFirstName.Location = new Point(35, 174);
             lblFirstName.Margin = new Padding(4, 0, 4, 0);
             lblFirstName.Name = "lblFirstName";
             lblFirstName.Size = new Size(86, 21);
@@ -132,7 +144,7 @@
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(35, 175);
+            lblPassword.Location = new Point(35, 116);
             lblPassword.Margin = new Padding(4, 0, 4, 0);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(76, 21);
@@ -142,7 +154,7 @@
             // lblUserID
             // 
             lblUserID.AutoSize = true;
-            lblUserID.Location = new Point(176, 116);
+            lblUserID.Location = new Point(176, 345);
             lblUserID.Margin = new Padding(4, 0, 4, 0);
             lblUserID.Name = "lblUserID";
             lblUserID.Size = new Size(61, 21);
@@ -152,7 +164,7 @@
             // lblUser_ID
             // 
             lblUser_ID.AutoSize = true;
-            lblUser_ID.Location = new Point(35, 116);
+            lblUser_ID.Location = new Point(35, 345);
             lblUser_ID.Margin = new Padding(4, 0, 4, 0);
             lblUser_ID.Name = "lblUser_ID";
             lblUser_ID.Size = new Size(61, 21);
@@ -171,31 +183,31 @@
             // 
             // txtLastName
             // 
-            txtLastName.Location = new Point(309, 283);
+            txtLastName.Location = new Point(176, 224);
             txtLastName.Margin = new Padding(4);
             txtLastName.Name = "txtLastName";
-            txtLastName.Size = new Size(190, 29);
-            txtLastName.TabIndex = 1;
+            txtLastName.Size = new Size(323, 29);
+            txtLastName.TabIndex = 4;
             // 
             // txtFirstName
             // 
-            txtFirstName.Location = new Point(309, 230);
+            txtFirstName.Location = new Point(176, 171);
             txtFirstName.Margin = new Padding(4);
             txtFirstName.Name = "txtFirstName";
-            txtFirstName.Size = new Size(190, 29);
-            txtFirstName.TabIndex = 1;
+            txtFirstName.Size = new Size(323, 29);
+            txtFirstName.TabIndex = 3;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(176, 172);
+            txtPassword.Location = new Point(176, 113);
             txtPassword.Margin = new Padding(4);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(323, 29);
-            txtPassword.TabIndex = 1;
+            txtPassword.TabIndex = 2;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(176, 59);
+            txtEmail.Location = new Point(176, 60);
             txtEmail.Margin = new Padding(4);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(323, 29);
@@ -212,6 +224,7 @@
             Margin = new Padding(4);
             Name = "UserDetailForm";
             Text = "UserDetailForm";
+            Load += UserDetailForm_Load;
             gbBookDetails.ResumeLayout(false);
             gbBookDetails.PerformLayout();
             ResumeLayout(false);
@@ -234,5 +247,6 @@
         private TextBox txtPassword;
         private TextBox txtEmail;
         private Label lblUserID;
+        private CheckBox cbAddAnother;
     }
 }

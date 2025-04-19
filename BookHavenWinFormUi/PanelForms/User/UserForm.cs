@@ -2,6 +2,7 @@
 using BookHavenClassLibrary.Enumz;
 using BookHavenClassLibrary.Interfaces;
 using BookHavenClassLibrary.Repositories;
+using BookHavenWinFormUi.PanelForms.Books;
 using BookHavenWinFormUi.Utilz;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,6 @@ namespace BookHavenWinFormUi.PanelForms.User
     {
 
         private readonly IUserRepository _userRepository;
-     
         private List<UserResponseDto?> allUsers = [];
 
         public UserForm(IUserRepository userRepository)
@@ -29,6 +29,18 @@ namespace BookHavenWinFormUi.PanelForms.User
             InitializeComponent();
             this.Load += UserForm_Load;
         }
+
+        #region Form Events
+        private async void UserForm_Load(object? sender, EventArgs e)
+        {
+            ConfigureGrid();
+            await LoadListAsync();
+            LoadUserTypesToFilterComboBox();
+        }
+
+        #endregion
+
+        #region Support Methods
 
         private void ConfigureGrid()
         {
@@ -48,18 +60,22 @@ namespace BookHavenWinFormUi.PanelForms.User
         {
             var userTypes = Enum.GetValues(typeof(UserRoleType)).Cast<UserRoleType>().ToList();
 
-            var userTypeList = new List<KeyValuePair<string, UserRoleType>>();
-            userTypeList.Add(new KeyValuePair<string, UserRoleType>("All Types", 0));
-
-            foreach(var userType in userTypes)
+            var userTypeList = new List<KeyValuePair<string, object>>
             {
-                Type type = typeof(UserRoleType);
-                var fieldInfo = type.GetField(userType.ToString());
+                new KeyValuePair<string, object>("All Types", "ALL") // this is just a flag, not tied to enum
+             };
 
-                var enumMemberAttribute = fieldInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false).FirstOrDefault() as EnumMemberAttribute;
 
-                string displayName = enumMemberAttribute?.Value ?? userType.ToString();
-                userTypeList.Add(new KeyValuePair<string, UserRoleType>(displayName, userType));
+            foreach (var userType in userTypes)
+            {
+                var fieldInfo = typeof(UserRoleType).GetField(userType.ToString());
+                if (fieldInfo != null)
+                {
+                    var enumMemberAttribute = fieldInfo.GetCustomAttributes(typeof(EnumMemberAttribute), false)
+                                                       .FirstOrDefault() as EnumMemberAttribute;
+                    string displayName = enumMemberAttribute?.Value ?? userType.ToString();
+                    userTypeList.Add(new KeyValuePair<string, object>(displayName, userType));
+                }
             }
 
             cmbUserTypes.DataSource = userTypeList;
@@ -103,47 +119,80 @@ namespace BookHavenWinFormUi.PanelForms.User
         private void Search()
         {
             var key = txtSearchKey.Text.Trim().ToLower();
-            string? selectedUserType = (cmbUserTypes.SelectedValue != null && cmbUserTypes !=null) ? cmbUserTypes?.SelectedItem?.ToString() : string.Empty;
-            
+            //string? selectedUserType = (cmbUserTypes.SelectedValue != null && cmbUserTypes !=null) ? cmbUserTypes?.SelectedItem?.ToString() : string.Empty;
+            object selectedValue = cmbUserTypes.SelectedValue ?? "ALL";
             var filterUsers = allUsers.ToList();
 
-            if (string.IsNullOrWhiteSpace(key))
+            if (!string.IsNullOrWhiteSpace(key)) // ✅ This should be negated
             {
-                filterUsers = filterUsers.Where(v => 
-                v.FirstName.ToLower().Contains(key) || 
-                v.Email.ToLower().Contains(key)).ToList();
-                
+                filterUsers = filterUsers.Where(v =>
+                    v.FirstName.ToLower().Contains(key) ||
+                    v.Email.ToLower().Contains(key)).ToList();
             }
 
-           
+            
+            // ✅ Filter by user role if not "ALL"
+            if (selectedValue is UserRoleType selectedRole)
+            {
+                filterUsers = filterUsers.Where(v => v != null && v.Role == selectedRole).ToList();
+            }
+
+
             DisplayAll(filterUsers);
         }
 
-        private async void SaveAsync(RegistrationRequestDto user, string? id)
+        private string? GetSelectedUserId()
+        {
+            if (gridViewUserList.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a user.");
+                return null;
+            }
+
+            var userId = gridViewUserList.SelectedRows[0].Cells["ID"].Value?.ToString();
+            if (string.IsNullOrWhiteSpace(userId))
+            {
+                MessageBox.Show("Invalid user ID.");
+                return null;
+            }
+
+            return userId;
+        }
+
+        #endregion
+
+        #region CRUD Opertations
+        private async Task RegisterUserAsync(RegistrationRequestDto user)
         {
             try
             {
-                if (id == null)
-                {
-                    await _userRepository.RegisterAsync(user);
-                    MessageBox.Show("User added successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    await _userRepository.UpdateAsync(id, user);
-                    MessageBox.Show("User updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
+                await _userRepository.RegisterAsync(user);
+                MessageBox.Show("User added successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 await LoadListAsync();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}", "User Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error registering user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private async Task UpdateUserAsync(string id, UpdateRequestDto user)
+        {
+            try
+            {
+                await _userRepository.UpdateAsync(id, user);
+                MessageBox.Show("User updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await LoadListAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating user: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
+        #endregion
 
+        #region Button Events
         private void txtSearchKey_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -167,67 +216,45 @@ namespace BookHavenWinFormUi.PanelForms.User
             Search();
         }
 
-
-
-        private async void UserForm_Load(object sender, EventArgs e)
-        {
-            ConfigureGrid();
-            await LoadListAsync();
-            LoadUserTypesToFilterComboBox();
-        }
-
         private void btnAddNewUser_Click(object sender, EventArgs e)
         {
-            using var form = new UserDetailForm();
-            form.ShowDialog();
-            if (form.DialogResult == DialogResult.OK)
+            using (var form = new UserDetailForm())
             {
-                SaveAsync(form.User, null);
+
+                form.OnAdded += async (user) =>
+                {
+                    await RegisterUserAsync(user);
+                    await LoadListAsync();
+                };
+
+                form.ShowDialog();
+                
             }
+                        
         }
 
-        private void btnEditUser_Click(object sender, EventArgs e)
+        private async void btnEditUser_Click(object sender, EventArgs e)
         {
-            if (gridViewUserList.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Please select a user to edit.");
-                return;
-            }
-
-            string? userId = gridViewUserList.SelectedRows[0].Cells["ID"].Value?.ToString();
-            
-            if (string.IsNullOrWhiteSpace(userId))
-            {
-                MessageBox.Show("Invalid user ID.");
-                return;
-            }
+            string? userId = GetSelectedUserId();
+            if (userId == null) return;
 
             var userToEdit = allUsers.FirstOrDefault(u => u?.Id == userId);
             if (userToEdit == null) return;
 
-            using var form = new UserDetailForm(userToEdit);
-            form.ShowDialog();
-            if (form.DialogResult == DialogResult.OK)
+            using (var form = new UserDetailForm(userToEdit))
             {
-                SaveAsync(form.User, userId);
+                form.OnUpdated += async (updatedUser) =>
+                {
+                    await UpdateUserAsync(userId, updatedUser);
+                };
+                form.ShowDialog();
             }
         }
 
         private async void btnDeleteUser_Click(object sender, EventArgs e)
         {
-            if (gridViewUserList.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Please select a user to delete.");
-                return;
-            }
-
-            string? userId = gridViewUserList.SelectedRows[0].Cells["ID"].Value?.ToString();
-
-            if (string.IsNullOrWhiteSpace(userId))
-            {
-                MessageBox.Show("Invalid user ID.");
-                return;
-            }
+            string? userId = GetSelectedUserId();
+            if (userId == null) return;
 
             var confirm = MessageBox.Show("Delete this user?", "Confirm", MessageBoxButtons.YesNo);
             if (confirm == DialogResult.Yes)
@@ -236,5 +263,7 @@ namespace BookHavenWinFormUi.PanelForms.User
                 await LoadListAsync();
             }
         }
+        #endregion
+
     }
 }

@@ -45,6 +45,7 @@
             txtSellingPrice = new TextBox();
             txtISBN = new TextBox();
             txtAuthorName = new TextBox();
+            cbAddAnother = new CheckBox();
             gbBookDetails.SuspendLayout();
             SuspendLayout();
             // 
@@ -92,6 +93,7 @@
             // 
             // gbBookDetails
             // 
+            gbBookDetails.Controls.Add(cbAddAnother);
             gbBookDetails.Controls.Add(btnSave);
             gbBookDetails.Controls.Add(btnCancel);
             gbBookDetails.Controls.Add(cmbGenreList);
@@ -207,6 +209,16 @@
             txtAuthorName.Size = new Size(323, 29);
             txtAuthorName.TabIndex = 1;
             // 
+            // cbAddAnother
+            // 
+            cbAddAnother.AutoSize = true;
+            cbAddAnother.Location = new Point(382, 398);
+            cbAddAnother.Name = "cbAddAnother";
+            cbAddAnother.Size = new Size(117, 25);
+            cbAddAnother.TabIndex = 5;
+            cbAddAnother.Text = "Add Another";
+            cbAddAnother.UseVisualStyleBackColor = true;
+            // 
             // BookDetailsDialog
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
@@ -242,5 +254,6 @@
         private TextBox txtSellingPrice;
         private TextBox txtISBN;
         private TextBox txtAuthorName;
+        private CheckBox cbAddAnother;
     }
 }

@@ -19,3 +19,4 @@ namespace BookHavenClassLibrary.Enumz
         Sales = 2
     }
 }
+

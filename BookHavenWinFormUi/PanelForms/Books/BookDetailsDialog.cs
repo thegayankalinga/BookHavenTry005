@@ -1,5 +1,7 @@
 ﻿using BookHavenClassLibrary.Dtos.Book;
 using BookHavenClassLibrary.Enumz;
+using BookHavenWinFormUi.Utilz;
+using ScottPlot.Colormaps;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +12,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace BookHavenWinFormUi.PanelForms.Books
 {
@@ -19,6 +22,7 @@ namespace BookHavenWinFormUi.PanelForms.Books
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BookRequestDto BookData { get; set; }
         private bool _isEditMode = false;
+        public event Action<BookRequestDto>? OnBookAdded;
         public BookDetailsDialog()
         {
             InitializeComponent();
@@ -65,7 +69,8 @@ namespace BookHavenWinFormUi.PanelForms.Books
 
         private void BookDetailsDialog_Load(object sender, EventArgs e)
         {
-            LoadGenresToComboBox();
+            ComboBoxHelper.LoadEnumToComboBox<BookGenres>(cmbGenreList);
+            //LoadGenresToComboBox();
 
             // If in edit mode, populate the fields with existing data
             if (_isEditMode)
@@ -75,60 +80,61 @@ namespace BookHavenWinFormUi.PanelForms.Books
                 txtISBN.Text = BookData.Isbn;
                 txtSellingPrice.Text = BookData.SellingPrice.ToString();
                 txtCurrentStock.Text = BookData.StockQuantity.ToString();
-
+                cbAddAnother.Visible = false;
                 // Select the correct genre
-                SelectGenreInComboBox(BookData.BookGenre);
+                ComboBoxHelper.SelectEnumInComboBox<BookGenres>(cmbGenreList, BookData.BookGenre);
+                //SelectGenreInComboBox(BookData.BookGenre);
             }
         }
 
-        private void LoadGenresToComboBox()
-        {
-            // Get all enum values
-            var genres = Enum.GetValues(typeof(BookGenres))
-                             .Cast<BookGenres>();
+        //private void LoadGenresToComboBox()
+        //{
+        //    // Get all enum values
+        //    var genres = Enum.GetValues(typeof(BookGenres))
+        //                     .Cast<BookGenres>();
 
-            // Create a list to store display names and values
-            var genreList = new List<KeyValuePair<string, BookGenres>>();
+        //    // Create a list to store display names and values
+        //    var genreList = new List<KeyValuePair<string, BookGenres>>();
 
-            // Iterate through each enum value to get the display name from EnumMember attribute
-            foreach (var genre in genres)
-            {
-                // Get enum type
-                Type type = typeof(BookGenres);
+        //    // Iterate through each enum value to get the display name from EnumMember attribute
+        //    foreach (var genre in genres)
+        //    {
+        //        // Get enum type
+        //        Type type = typeof(BookGenres);
 
-                // Get field info for the current enum value
-                var fieldInfo = type.GetField(genre.ToString());
+        //        // Get field info for the current enum value
+        //        var fieldInfo = type.GetField(genre.ToString());
 
-                // Get EnumMember attribute if present
-                var enumMemberAttribute = fieldInfo.GetCustomAttributes(
-                    typeof(EnumMemberAttribute), false)
-                    .FirstOrDefault() as EnumMemberAttribute;
+        //        // Get EnumMember attribute if present
+        //        var enumMemberAttribute = fieldInfo.GetCustomAttributes(
+        //            typeof(EnumMemberAttribute), false)
+        //            .FirstOrDefault() as EnumMemberAttribute;
 
-                // Get display name (either from attribute or enum name)
-                string displayName = enumMemberAttribute?.Value ?? genre.ToString();
+        //        // Get display name (either from attribute or enum name)
+        //        string displayName = enumMemberAttribute?.Value ?? genre.ToString();
 
-                // Add to list
-                genreList.Add(new KeyValuePair<string, BookGenres>(displayName, genre));
-            }
+        //        // Add to list
+        //        genreList.Add(new KeyValuePair<string, BookGenres>(displayName, genre));
+        //    }
 
-            // Set the data source, display and value members
-            cmbGenreList.DataSource = genreList;
-            cmbGenreList.DisplayMember = "Key";   // Display name from EnumMember attribute
-            cmbGenreList.ValueMember = "Value";   // Actual enum value
-        }
+        //    // Set the data source, display and value members
+        //    cmbGenreList.DataSource = genreList;
+        //    cmbGenreList.DisplayMember = "Key";   // Display name from EnumMember attribute
+        //    cmbGenreList.ValueMember = "Value";   // Actual enum value
+        //}
 
-        private void SelectGenreInComboBox(BookGenres genre)
-        {
-            for (int i = 0; i < cmbGenreList.Items.Count; i++)
-            {
-                var item = (KeyValuePair<string, BookGenres>)cmbGenreList.Items[i];
-                if (item.Value == genre)
-                {
-                    cmbGenreList.SelectedIndex = i;
-                    break;
-                }
-            }
-        }
+        //private void SelectGenreInComboBox(BookGenres genre)
+        //{
+        //    for (int i = 0; i < cmbGenreList.Items.Count; i++)
+        //    {
+        //        var item = (KeyValuePair<string, BookGenres>)cmbGenreList.Items[i];
+        //        if (item.Value == genre)
+        //        {
+        //            cmbGenreList.SelectedIndex = i;
+        //            break;
+        //        }
+        //    }
+        //}
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -188,15 +194,72 @@ namespace BookHavenWinFormUi.PanelForms.Books
             BookData.SellingPrice = sellingPrice;
             BookData.StockQuantity = stockQuantity;
 
-            // Close dialog with success
-            DialogResult = DialogResult.OK;
+
+
+            // If cbAddAnother is checked, keep dialog open and reset fields
+            if (cbAddAnother.Checked && !_isEditMode)
+            {
+                OnBookAdded?.Invoke(BookData); // Send book to caller
+                MessageBox.Show("Book saved. Ready to add another.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ResetForm();
+                return;
+            }
+            if (!_isEditMode)
+            {
+                OnBookAdded?.Invoke(BookData);
+                DialogResult = DialogResult.OK;
+                Close();
+            }
+            else
+            {
+                DialogResult = DialogResult.OK;
+
+                Close();
+            }
+
+                // Close dialog with success
+              
             Close();
         }
+
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void ResetForm()
+        {
+            txtBookTitle.Clear();
+            txtAuthorName.Clear();
+            txtISBN.Clear();
+            txtSellingPrice.Clear();
+            txtCurrentStock.Clear();
+            cmbGenreList.SelectedIndex = 0;
+
+            BookData = new BookRequestDto
+            {
+                Title = "",
+                Author = "",
+                BookGenre = BookGenres.Fiction,
+                Isbn = "",
+                SellingPrice = 0,
+                StockQuantity = 0
+            };
+
+            txtBookTitle.Focus();
+
+            BookData = new BookRequestDto
+            {
+                Title = "",
+                Author = "",
+                BookGenre = BookHavenClassLibrary.Enumz.BookGenres.Fiction, // Default genre
+                Isbn = "",
+                SellingPrice = 0,
+                StockQuantity = 0
+            };
         }
     }
 }

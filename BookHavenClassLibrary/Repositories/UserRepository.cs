@@ -14,6 +14,7 @@ namespace BookHavenClassLibrary.Repositories
     {
         private readonly IDbContextFactory<AppDbContext> _contextFactory;
         private readonly UserManager<AppUser> _userManager;
+
         private readonly SignInManager<AppUser> _signInManager;
 
 
@@ -22,6 +23,7 @@ namespace BookHavenClassLibrary.Repositories
             _contextFactory = contextFactory;
             _userManager = userManager;
             _signInManager = signInManager;
+
         }
 
 
@@ -43,7 +45,9 @@ namespace BookHavenClassLibrary.Repositories
 
         public async Task<UserResponseDto?> RegisterAsync(RegistrationRequestDto registrationRequest)
         {
-            var existingUser = await _userManager.FindByEmailAsync(registrationRequest.Email);
+            using var dbContext = _contextFactory.CreateDbContext();
+            var existingUser = await dbContext.AppUsers.FirstOrDefaultAsync(u => u.Email == registrationRequest.Email);
+
             if (existingUser != null)
                 return null; // Email already exists
 
@@ -53,6 +57,7 @@ namespace BookHavenClassLibrary.Repositories
             user.LastLoginAt = DateTime.UtcNow;
 
             var result = await _userManager.CreateAsync(user, registrationRequest.Password);
+            
 
             if (!result.Succeeded)
             {
@@ -62,6 +67,7 @@ namespace BookHavenClassLibrary.Repositories
                 }
                 return null;
             }
+            await Task.Delay(3000);
             await _userManager.AddToRoleAsync(user, registrationRequest.Role.ToString());
 
 
@@ -107,7 +113,7 @@ namespace BookHavenClassLibrary.Repositories
         }
 
 
-        public async Task<bool> UpdateAsync(string id, RegistrationRequestDto request)
+        public async Task<bool> UpdateAsync(string id, UpdateRequestDto request)
         {
             using var dbContext = _contextFactory.CreateDbContext();
             var user = await dbContext.Users.FindAsync(id).ConfigureAwait(false);

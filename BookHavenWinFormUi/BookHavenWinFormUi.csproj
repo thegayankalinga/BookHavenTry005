@@ -23,10 +23,17 @@
     </None>
   </ItemGroup>
 
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="FontAwesome" Version="4.7.0" />
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.4" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4" />
@@ -34,7 +41,7 @@
     <PackageReference Include="OpenTK" Version="4.8.2" />
     <PackageReference Include="ScottPlot.WinForms" Version="5.0.55" />
     <PackageReference Include="WinForms.DataVisualization" Version="1.10.0" />
-	  <PackageReference Include="OpenTK.GLControl" Version="3.1.0" ExcludeAssets="All" />
+	<PackageReference Include="OpenTK.GLControl" Version="3.1.0" ExcludeAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
