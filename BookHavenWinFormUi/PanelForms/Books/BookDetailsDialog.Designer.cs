@@ -35,6 +35,7 @@
             cmbGenreList = new ComboBox();
             btnCancel = new Button();
             gbBookDetails = new GroupBox();
+            cbAddAnother = new CheckBox();
             btnSave = new Button();
             lblGenre = new Label();
             lblStock = new Label();
@@ -45,7 +46,6 @@
             txtSellingPrice = new TextBox();
             txtISBN = new TextBox();
             txtAuthorName = new TextBox();
-            cbAddAnother = new CheckBox();
             gbBookDetails.SuspendLayout();
             SuspendLayout();
             // 
@@ -78,7 +78,7 @@
             cmbGenreList.Location = new Point(176, 338);
             cmbGenreList.Name = "cmbGenreList";
             cmbGenreList.Size = new Size(323, 29);
-            cmbGenreList.TabIndex = 3;
+            cmbGenreList.TabIndex = 6;
             // 
             // btnCancel
             // 
@@ -86,7 +86,7 @@
             btnCancel.Location = new Point(190, 477);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(140, 47);
-            btnCancel.TabIndex = 4;
+            btnCancel.TabIndex = 9;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += btnCancel_Click;
@@ -116,13 +116,23 @@
             gbBookDetails.TabStop = false;
             gbBookDetails.Text = "Book Details";
             // 
+            // cbAddAnother
+            // 
+            cbAddAnother.AutoSize = true;
+            cbAddAnother.Location = new Point(382, 398);
+            cbAddAnother.Name = "cbAddAnother";
+            cbAddAnother.Size = new Size(117, 25);
+            cbAddAnother.TabIndex = 7;
+            cbAddAnother.Text = "Add Another";
+            cbAddAnother.UseVisualStyleBackColor = true;
+            // 
             // btnSave
             // 
             btnSave.ForeColor = SystemColors.ActiveCaptionText;
             btnSave.Location = new Point(359, 477);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(140, 47);
-            btnSave.TabIndex = 4;
+            btnSave.TabIndex = 8;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
@@ -183,7 +193,7 @@
             txtCurrentStock.Margin = new Padding(4);
             txtCurrentStock.Name = "txtCurrentStock";
             txtCurrentStock.Size = new Size(190, 29);
-            txtCurrentStock.TabIndex = 1;
+            txtCurrentStock.TabIndex = 5;
             // 
             // txtSellingPrice
             // 
@@ -191,7 +201,7 @@
             txtSellingPrice.Margin = new Padding(4);
             txtSellingPrice.Name = "txtSellingPrice";
             txtSellingPrice.Size = new Size(190, 29);
-            txtSellingPrice.TabIndex = 1;
+            txtSellingPrice.TabIndex = 4;
             // 
             // txtISBN
             // 
@@ -199,7 +209,7 @@
             txtISBN.Margin = new Padding(4);
             txtISBN.Name = "txtISBN";
             txtISBN.Size = new Size(323, 29);
-            txtISBN.TabIndex = 1;
+            txtISBN.TabIndex = 3;
             // 
             // txtAuthorName
             // 
@@ -207,17 +217,7 @@
             txtAuthorName.Margin = new Padding(4);
             txtAuthorName.Name = "txtAuthorName";
             txtAuthorName.Size = new Size(323, 29);
-            txtAuthorName.TabIndex = 1;
-            // 
-            // cbAddAnother
-            // 
-            cbAddAnother.AutoSize = true;
-            cbAddAnother.Location = new Point(382, 398);
-            cbAddAnother.Name = "cbAddAnother";
-            cbAddAnother.Size = new Size(117, 25);
-            cbAddAnother.TabIndex = 5;
-            cbAddAnother.Text = "Add Another";
-            cbAddAnother.UseVisualStyleBackColor = true;
+            txtAuthorName.TabIndex = 2;
             // 
             // BookDetailsDialog
             // 

@@ -63,7 +63,7 @@
             btnAddNewBook.Location = new Point(21, 41);
             btnAddNewBook.Name = "btnAddNewBook";
             btnAddNewBook.Size = new Size(123, 40);
-            btnAddNewBook.TabIndex = 2;
+            btnAddNewBook.TabIndex = 6;
             btnAddNewBook.Text = "Add New";
             btnAddNewBook.UseVisualStyleBackColor = true;
             btnAddNewBook.Click += btnSaveBook_Click;
@@ -74,7 +74,7 @@
             btnDeleteBook.Location = new Point(328, 41);
             btnDeleteBook.Name = "btnDeleteBook";
             btnDeleteBook.Size = new Size(123, 40);
-            btnDeleteBook.TabIndex = 2;
+            btnDeleteBook.TabIndex = 8;
             btnDeleteBook.Text = "Delete";
             btnDeleteBook.UseVisualStyleBackColor = true;
             btnDeleteBook.Click += btnDeleteBook_Click;
@@ -85,7 +85,7 @@
             btnEditBook.Location = new Point(172, 41);
             btnEditBook.Name = "btnEditBook";
             btnEditBook.Size = new Size(123, 40);
-            btnEditBook.TabIndex = 2;
+            btnEditBook.TabIndex = 7;
             btnEditBook.Text = "Edit";
             btnEditBook.UseVisualStyleBackColor = true;
             btnEditBook.Click += btnEditBook_Click;
@@ -105,7 +105,7 @@
             txtSearchKey.Location = new Point(94, 30);
             txtSearchKey.Name = "txtSearchKey";
             txtSearchKey.Size = new Size(211, 29);
-            txtSearchKey.TabIndex = 4;
+            txtSearchKey.TabIndex = 1;
             txtSearchKey.KeyPress += txtSearchKey_KeyPress;
             // 
             // cmbAuthor
@@ -114,7 +114,7 @@
             cmbAuthor.Location = new Point(407, 30);
             cmbAuthor.Name = "cmbAuthor";
             cmbAuthor.Size = new Size(205, 29);
-            cmbAuthor.TabIndex = 5;
+            cmbAuthor.TabIndex = 2;
             cmbAuthor.SelectedIndexChanged += cmbAuthor_SelectedIndexChanged;
             // 
             // lblAuthor
@@ -143,7 +143,7 @@
             cmbGenre.Location = new Point(713, 30);
             cmbGenre.Name = "cmbGenre";
             cmbGenre.Size = new Size(183, 29);
-            cmbGenre.TabIndex = 5;
+            cmbGenre.TabIndex = 3;
             cmbGenre.SelectedIndexChanged += cmbGenre_SelectedIndexChanged;
             // 
             // groupBox1
@@ -170,7 +170,7 @@
             btnResetFilter.Location = new Point(634, 83);
             btnResetFilter.Name = "btnResetFilter";
             btnResetFilter.Size = new Size(123, 40);
-            btnResetFilter.TabIndex = 2;
+            btnResetFilter.TabIndex = 5;
             btnResetFilter.Text = "Reset";
             btnResetFilter.UseVisualStyleBackColor = true;
             btnResetFilter.Click += btnResetFilter_Click;
@@ -181,7 +181,7 @@
             btnSearch.Location = new Point(773, 83);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(123, 40);
-            btnSearch.TabIndex = 2;
+            btnSearch.TabIndex = 4;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
