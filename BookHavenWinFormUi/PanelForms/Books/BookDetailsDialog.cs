@@ -15,6 +15,8 @@ namespace BookHavenWinFormUi.PanelForms.Books
 {
     public partial class BookDetailsDialog : Form
     {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BookRequestDto BookData { get; set; }
         private bool _isEditMode = false;
         public BookDetailsDialog()

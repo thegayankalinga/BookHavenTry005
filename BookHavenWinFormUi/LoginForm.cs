@@ -1,6 +1,7 @@
 using BookHavenClassLibrary.Dtos.User;
 using BookHavenClassLibrary.Interfaces;
 using BookHavenClassLibrary.Repositories;
+using BookHavenClassLibrary.Services;
 using BookHavenWinFormUi.PanelForms;
 using BookHavenWinFormUi.Utilz;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,17 +12,20 @@ namespace BookHavenWinFormUi
     {
         private readonly IUserRepository _userRepository;
         private readonly IServiceProvider _serviceProvider;
-        public LoginForm(IUserRepository userRepository, IServiceProvider serviceProvider)
+        private readonly IUserSessionService _sessionService;
+        public LoginForm(IUserRepository userRepository, IServiceProvider serviceProvider, IUserSessionService sessionService)
         {
 
             _serviceProvider = serviceProvider;
             _userRepository = userRepository;
+            _sessionService = sessionService;
             InitializeComponent();
 
             //TODO: remove for production
             userEmail.Text = "admin@bookhaven.com";
             userPassword.Text = "test123";
             _serviceProvider = serviceProvider;
+            _sessionService = sessionService;
         }
 
         private async void loginButton_Click(object sender, EventArgs e)
@@ -50,32 +54,25 @@ namespace BookHavenWinFormUi
             loginRequestDto.Email = email;
             loginRequestDto.Password = password;
 
-            UserResponseDto? userResponseDto = await _userRepository.Login(loginRequestDto);
+            bool loginSuccessful = await _sessionService.LoginAsync(loginRequestDto);
 
-            if (userResponseDto != null)
+            if (loginSuccessful)
             {
-
-                // Store user details in session
-                UserSession.SetUser(userResponseDto.Id, userResponseDto.Email, userResponseDto.FullName, userResponseDto.Role);
-
-                //TODO: gotomain form
                 MainForm mainForm = _serviceProvider.GetRequiredService<MainForm>();
                 this.Hide();
                 mainForm.ShowDialog();
                 this.Close();
+            }
+            else
+            {
+                MessageBox.Show(this, "Invalid User, Please use correct login information");
+            }
 
-              
-                //MessageBox.Show(this, "Login Successful");
-            }
-            else {
-               MessageBox.Show(this, $"Invalid User, Please use correct login information");
-            }
+
+
+
+
+
         }
-           
-            
-
-        
-
-        
     }
 }

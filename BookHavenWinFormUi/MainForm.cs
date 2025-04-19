@@ -1,4 +1,5 @@
-﻿using BookHavenWinFormUi.PanelForms;
+﻿using BookHavenClassLibrary.Interfaces;
+using BookHavenWinFormUi.PanelForms;
 using BookHavenWinFormUi.PanelForms.Customer;
 using BookHavenWinFormUi.PanelForms.Reports;
 using BookHavenWinFormUi.PanelForms.Supplier;
@@ -25,17 +26,20 @@ namespace BookHavenWinFormUi
 
     public partial class MainForm : Form
     {
+        private readonly IUserSessionService _userSessionService;
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
 
 
 
-        public MainForm()
+
+        public MainForm(IUserSessionService sessionService)
         {
 
 
             InitializeComponent();
+            _userSessionService = sessionService;
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 60);
             panelSideMenu.Controls.Add(leftBorderBtn);
@@ -139,6 +143,7 @@ namespace BookHavenWinFormUi
             //OpenChildForm(new FormDashboard());
         }
 
+
         private void btnSupplier_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
@@ -192,7 +197,18 @@ namespace BookHavenWinFormUi
 
         }
 
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            _userSessionService.Logout();
+            Application.Restart(); //this is much easier.
 
+            // Redirect to login form
+            //this.Close();
+            //var navigationService = Program.Host.Services.GetRequiredService<NavigationService>();
+            //navigationService.ShowLoginForm();
+
+            // Close current form
+        }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -210,7 +226,7 @@ namespace BookHavenWinFormUi
         }
 
 
-        //Code to handle the window
+        #region Code to handle the window
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
@@ -226,20 +242,19 @@ namespace BookHavenWinFormUi
             }
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            UserSession.Logout();
-            Application.Restart(); //this is much easier.
+            btnSupplier.Visible = _userSessionService.HasPermission(BookHavenClassLibrary.Enumz.UserRoleType.Admin);
+            btnUsers.Visible = _userSessionService.HasPermission(BookHavenClassLibrary.Enumz.UserRoleType.Admin);
+            //TODO: remaining matrix.
 
-            // Redirect to login form
-            //this.Close();
-            //var navigationService = Program.Host.Services.GetRequiredService<NavigationService>();
-            //navigationService.ShowLoginForm();
-
-            // Close current form
         }
 
-       
+        #endregion
+
+
+
+
 
 
 

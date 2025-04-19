@@ -10,7 +10,7 @@ namespace BookHavenClassLibrary.Mappers
 {
     public class UserMapper
     {
-        public static UserResponseDto? MapToUserResponseDto(User user)
+        public static UserResponseDto? MapToUserResponseDto(AppUser user)
         {
             if (user == null)
                 return null;
@@ -27,9 +27,9 @@ namespace BookHavenClassLibrary.Mappers
             };
         }
 
-        public static User MapToUser(RegistrationRequestDto registrationRequest)
+        public static AppUser MapToUser(RegistrationRequestDto registrationRequest)
         {
-            return new User
+            return new AppUser
             {
 
                 FirstName = registrationRequest.FirstName,

@@ -1,12 +1,15 @@
 ﻿using BookHavenClassLibrary.Connections;
 using BookHavenClassLibrary.Interfaces;
+using BookHavenClassLibrary.Models;
 using BookHavenClassLibrary.Repositories;
+using BookHavenClassLibrary.Services;
 using BookHavenWinFormUi.PanelForms;
 using BookHavenWinFormUi.PanelForms.Customer;
 using BookHavenWinFormUi.PanelForms.Reports;
 using BookHavenWinFormUi.PanelForms.Supplier;
 using BookHavenWinFormUi.PanelForms.User;
 using BookHavenWinFormUi.Utilz;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,12 +21,15 @@ namespace BookHavenWinFormUi
     internal static class Program
     {
         public static IHost Host { get; private set; } = null!;
+        public static ServiceProvider ServiceProvider { get; private set; }
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
@@ -58,14 +64,16 @@ namespace BookHavenWinFormUi
                     //services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
                     services.AddDbContextFactory<AppDbContext>(options => options.UseSqlServer(connectionString));
 
-
+                    services.AddIdentity<AppUser, IdentityRole>()
+                        .AddEntityFrameworkStores<AppDbContext>()
+                        .AddDefaultTokenProviders();
 
 
                     //Register Repositories
                     //services.AddSingleton<IRepository, Repository>();
 
 
-
+                    services.AddScoped<IUserSessionService, UserSessionService>();
                     services.AddScoped<IUserRepository, UserRepository>();
                     services.AddScoped<ISupplierRepository, SupplierRepository>();
                     services.AddScoped<IBookRepository, BookRepository>();

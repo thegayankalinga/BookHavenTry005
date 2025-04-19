@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panelSideMenu = new Panel();
+            btnCustomer = new FontAwesome.Sharp.IconButton();
             btnLogout = new FontAwesome.Sharp.IconButton();
             btnReport = new FontAwesome.Sharp.IconButton();
             btnSales = new FontAwesome.Sharp.IconButton();
@@ -45,7 +46,6 @@
             panelShadow = new Panel();
             panelDesktop = new Panel();
             pictureBox2 = new PictureBox();
-            btnCustomer = new FontAwesome.Sharp.IconButton();
             panelSideMenu.SuspendLayout();
             panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -73,6 +73,28 @@
             panelSideMenu.Name = "panelSideMenu";
             panelSideMenu.Size = new Size(220, 798);
             panelSideMenu.TabIndex = 0;
+            // 
+            // btnCustomer
+            // 
+            btnCustomer.Dock = DockStyle.Top;
+            btnCustomer.FlatAppearance.BorderSize = 0;
+            btnCustomer.FlatStyle = FlatStyle.Flat;
+            btnCustomer.ForeColor = Color.Gainsboro;
+            btnCustomer.IconChar = FontAwesome.Sharp.IconChar.Bullhorn;
+            btnCustomer.IconColor = Color.RosyBrown;
+            btnCustomer.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnCustomer.IconSize = 32;
+            btnCustomer.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCustomer.Location = new Point(0, 560);
+            btnCustomer.Name = "btnCustomer";
+            btnCustomer.Padding = new Padding(10, 0, 20, 0);
+            btnCustomer.Size = new Size(220, 60);
+            btnCustomer.TabIndex = 11;
+            btnCustomer.Text = "Customer";
+            btnCustomer.TextAlign = ContentAlignment.MiddleLeft;
+            btnCustomer.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnCustomer.UseVisualStyleBackColor = true;
+            btnCustomer.Click += btnCustomer_Click;
             // 
             // btnLogout
             // 
@@ -336,28 +358,6 @@
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
             // 
-            // btnCustomer
-            // 
-            btnCustomer.Dock = DockStyle.Top;
-            btnCustomer.FlatAppearance.BorderSize = 0;
-            btnCustomer.FlatStyle = FlatStyle.Flat;
-            btnCustomer.ForeColor = Color.Gainsboro;
-            btnCustomer.IconChar = FontAwesome.Sharp.IconChar.Bullhorn;
-            btnCustomer.IconColor = Color.RosyBrown;
-            btnCustomer.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnCustomer.IconSize = 32;
-            btnCustomer.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCustomer.Location = new Point(0, 560);
-            btnCustomer.Name = "btnCustomer";
-            btnCustomer.Padding = new Padding(10, 0, 20, 0);
-            btnCustomer.Size = new Size(220, 60);
-            btnCustomer.TabIndex = 11;
-            btnCustomer.Text = "Customer";
-            btnCustomer.TextAlign = ContentAlignment.MiddleLeft;
-            btnCustomer.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnCustomer.UseVisualStyleBackColor = true;
-            btnCustomer.Click += btnCustomer_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
@@ -372,6 +372,7 @@
             Margin = new Padding(4);
             Name = "MainForm";
             Text = "MainForm";
+            Load += MainForm_Load;
             panelSideMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

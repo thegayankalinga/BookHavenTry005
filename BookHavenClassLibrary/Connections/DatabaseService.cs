@@ -12,7 +12,7 @@ namespace BookHavenClassLibrary.Connections
     public class DatabaseService
     {
 
-        private readonly string _connectionString;
+        private readonly string? _connectionString;
 
         public DatabaseService(IConfiguration configuration)
         {

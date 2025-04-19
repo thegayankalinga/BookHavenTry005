@@ -28,60 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            gridViewBookList = new DataGridView();
-            btnEditBook = new Button();
-            btnDeleteBook = new Button();
-            btnAddNewBook = new Button();
+            gridViewUserList = new DataGridView();
+            btnEditUser = new Button();
+            btnDeleteUser = new Button();
+            btnAddNewUser = new Button();
             txtSearchKey = new TextBox();
             lblSearchKey = new Label();
             groupBox1 = new GroupBox();
             btnResetFilter = new Button();
             btnSearch = new Button();
             groupBox2 = new GroupBox();
-            ((System.ComponentModel.ISupportInitialize)gridViewBookList).BeginInit();
+            lblUserTypes = new Label();
+            cmbUserTypes = new ComboBox();
+            ((System.ComponentModel.ISupportInitialize)gridViewUserList).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
-            // gridViewBookList
+            // gridViewUserList
             // 
-            gridViewBookList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridViewBookList.Location = new Point(70, 169);
-            gridViewBookList.MultiSelect = false;
-            gridViewBookList.Name = "gridViewBookList";
-            gridViewBookList.RowHeadersVisible = false;
-            gridViewBookList.Size = new Size(922, 420);
-            gridViewBookList.TabIndex = 9;
+            gridViewUserList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridViewUserList.Location = new Point(70, 169);
+            gridViewUserList.MultiSelect = false;
+            gridViewUserList.Name = "gridViewUserList";
+            gridViewUserList.RowHeadersVisible = false;
+            gridViewUserList.Size = new Size(922, 420);
+            gridViewUserList.TabIndex = 9;
             // 
-            // btnEditBook
+            // btnEditUser
             // 
-            btnEditBook.ForeColor = SystemColors.ActiveCaptionText;
-            btnEditBook.Location = new Point(172, 41);
-            btnEditBook.Name = "btnEditBook";
-            btnEditBook.Size = new Size(123, 40);
-            btnEditBook.TabIndex = 2;
-            btnEditBook.Text = "Edit";
-            btnEditBook.UseVisualStyleBackColor = true;
+            btnEditUser.ForeColor = SystemColors.ActiveCaptionText;
+            btnEditUser.Location = new Point(172, 41);
+            btnEditUser.Name = "btnEditUser";
+            btnEditUser.Size = new Size(123, 40);
+            btnEditUser.TabIndex = 2;
+            btnEditUser.Text = "Edit";
+            btnEditUser.UseVisualStyleBackColor = true;
+            btnEditUser.Click += btnEditUser_Click;
             // 
-            // btnDeleteBook
+            // btnDeleteUser
             // 
-            btnDeleteBook.ForeColor = SystemColors.ActiveCaptionText;
-            btnDeleteBook.Location = new Point(328, 41);
-            btnDeleteBook.Name = "btnDeleteBook";
-            btnDeleteBook.Size = new Size(123, 40);
-            btnDeleteBook.TabIndex = 2;
-            btnDeleteBook.Text = "Delete";
-            btnDeleteBook.UseVisualStyleBackColor = true;
+            btnDeleteUser.ForeColor = SystemColors.ActiveCaptionText;
+            btnDeleteUser.Location = new Point(328, 41);
+            btnDeleteUser.Name = "btnDeleteUser";
+            btnDeleteUser.Size = new Size(123, 40);
+            btnDeleteUser.TabIndex = 2;
+            btnDeleteUser.Text = "Delete";
+            btnDeleteUser.UseVisualStyleBackColor = true;
+            btnDeleteUser.Click += btnDeleteUser_Click;
             // 
-            // btnAddNewBook
+            // btnAddNewUser
             // 
-            btnAddNewBook.ForeColor = SystemColors.ActiveCaptionText;
-            btnAddNewBook.Location = new Point(21, 41);
-            btnAddNewBook.Name = "btnAddNewBook";
-            btnAddNewBook.Size = new Size(123, 40);
-            btnAddNewBook.TabIndex = 2;
-            btnAddNewBook.Text = "Add New";
-            btnAddNewBook.UseVisualStyleBackColor = true;
+            btnAddNewUser.ForeColor = SystemColors.ActiveCaptionText;
+            btnAddNewUser.Location = new Point(21, 41);
+            btnAddNewUser.Name = "btnAddNewUser";
+            btnAddNewUser.Size = new Size(123, 40);
+            btnAddNewUser.TabIndex = 2;
+            btnAddNewUser.Text = "Add New";
+            btnAddNewUser.UseVisualStyleBackColor = true;
+            btnAddNewUser.Click += btnAddNewUser_Click;
             // 
             // txtSearchKey
             // 
@@ -89,6 +94,7 @@
             txtSearchKey.Name = "txtSearchKey";
             txtSearchKey.Size = new Size(211, 29);
             txtSearchKey.TabIndex = 4;
+            txtSearchKey.KeyPress += txtSearchKey_KeyPress;
             // 
             // lblSearchKey
             // 
@@ -102,6 +108,8 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(cmbUserTypes);
+            groupBox1.Controls.Add(lblUserTypes);
             groupBox1.Controls.Add(btnResetFilter);
             groupBox1.Controls.Add(btnSearch);
             groupBox1.Controls.Add(txtSearchKey);
@@ -123,6 +131,7 @@
             btnResetFilter.TabIndex = 2;
             btnResetFilter.Text = "Reset";
             btnResetFilter.UseVisualStyleBackColor = true;
+            btnResetFilter.Click += btnResetFilter_Click;
             // 
             // btnSearch
             // 
@@ -133,12 +142,13 @@
             btnSearch.TabIndex = 2;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(btnEditBook);
-            groupBox2.Controls.Add(btnDeleteBook);
-            groupBox2.Controls.Add(btnAddNewBook);
+            groupBox2.Controls.Add(btnEditUser);
+            groupBox2.Controls.Add(btnDeleteUser);
+            groupBox2.Controls.Add(btnAddNewUser);
             groupBox2.ForeColor = SystemColors.ButtonHighlight;
             groupBox2.Location = new Point(75, 595);
             groupBox2.Name = "groupBox2";
@@ -147,21 +157,41 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Actions";
             // 
+            // lblUserTypes
+            // 
+            lblUserTypes.AutoSize = true;
+            lblUserTypes.ForeColor = SystemColors.ButtonHighlight;
+            lblUserTypes.Location = new Point(390, 33);
+            lblUserTypes.Name = "lblUserTypes";
+            lblUserTypes.Size = new Size(78, 21);
+            lblUserTypes.TabIndex = 5;
+            lblUserTypes.Text = "User Type";
+            // 
+            // cmbUserTypes
+            // 
+            cmbUserTypes.ForeColor = SystemColors.ActiveCaptionText;
+            cmbUserTypes.FormattingEnabled = true;
+            cmbUserTypes.Location = new Point(491, 30);
+            cmbUserTypes.Name = "cmbUserTypes";
+            cmbUserTypes.Size = new Size(210, 29);
+            cmbUserTypes.TabIndex = 6;
+            // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(46, 51, 73);
             ClientSize = new Size(1062, 720);
-            Controls.Add(gridViewBookList);
+            Controls.Add(gridViewUserList);
             Controls.Add(groupBox1);
             Controls.Add(groupBox2);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "UserForm";
             Text = "UserForm";
-            ((System.ComponentModel.ISupportInitialize)gridViewBookList).EndInit();
+            Load += UserForm_Load;
+            ((System.ComponentModel.ISupportInitialize)gridViewUserList).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -170,15 +200,17 @@
 
         #endregion
 
-        private DataGridView gridViewBookList;
-        private Button btnEditBook;
-        private Button btnDeleteBook;
-        private Button btnAddNewBook;
+        private DataGridView gridViewUserList;
+        private Button btnEditUser;
+        private Button btnDeleteUser;
+        private Button btnAddNewUser;
         private TextBox txtSearchKey;
         private Label lblSearchKey;
         private GroupBox groupBox1;
         private Button btnResetFilter;
         private Button btnSearch;
         private GroupBox groupBox2;
+        private ComboBox cmbUserTypes;
+        private Label lblUserTypes;
     }
 }

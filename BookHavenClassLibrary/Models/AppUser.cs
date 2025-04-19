@@ -6,35 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookHavenClassLibrary.Enumz;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookHavenClassLibrary.Models
 {
-    public class User
+    public class AppUser:IdentityUser
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+  
+        [Required]
+        [StringLength(50)]
+        public required string FirstName { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string FirstName { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string LastName { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [StringLength(100)]
-        public string Email { get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string PasswordHash { get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string Salt { get; set; }
+        public required string LastName { get; set; }
 
         [Required]
         public UserRoleType Role { get; set; }

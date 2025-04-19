@@ -23,7 +23,7 @@ namespace BookHavenClassLibrary.Models
         public SaleItem? SaleItem { get; set; }//Navigation Property    
 
         public int UserId { get; set; }
-        public User? User { get; set; }//Navigation Property
+        public AppUser? User { get; set; }//Navigation Property
 
         public DeliveryMethods DeliveryMethod { get; set; }
         

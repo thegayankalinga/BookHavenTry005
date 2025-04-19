@@ -18,7 +18,7 @@ namespace BookHavenClassLibrary.Connections
                 .Build();
 
             // Prioritize the environment variable, fallback to appsettings.json
-            string connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
+            string? connectionString = Environment.GetEnvironmentVariable("DefaultConnection")
                                       ?? config.GetConnectionString("DefaultConnection");
 
             if (string.IsNullOrEmpty(connectionString))

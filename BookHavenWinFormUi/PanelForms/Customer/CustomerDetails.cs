@@ -13,6 +13,8 @@ namespace BookHavenWinFormUi.PanelForms.Customer
 {
     public partial class CustomerDetails : Form
     {
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public CustomerRequestDto Customer { get; set; }
         private bool _isEditMode = false;
 

@@ -9,7 +9,14 @@ namespace BookHavenClassLibrary.Interfaces
 {
     public interface IUserRepository
     {
-        Task<UserResponseDto?> Login(LoginRequestDto loginRequest);
-        Task<UserResponseDto?> Register(RegistrationRequestDto registrationRequest);
+        Task<UserResponseDto?> LoginAsync(LoginRequestDto loginRequest);
+        Task<UserResponseDto?> RegisterAsync(RegistrationRequestDto registrationRequest);
+
+        Task<bool> ChangePasswordAsync(string id, string currentPassword, string newPassword);
+        Task<List<UserResponseDto?>> GetAllAsync();
+        Task<UserResponseDto?> GetByIdAsync(string id);
+        Task<bool> UpdateAsync(string id, RegistrationRequestDto request);
+        Task<bool> DeleteAsync(string id);
+        Task<bool> ExistsAsync(string id);
     }
 }
