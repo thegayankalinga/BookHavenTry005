@@ -62,7 +62,7 @@
             btnEditCustomer.Location = new Point(172, 41);
             btnEditCustomer.Name = "btnEditCustomer";
             btnEditCustomer.Size = new Size(123, 40);
-            btnEditCustomer.TabIndex = 2;
+            btnEditCustomer.TabIndex = 5;
             btnEditCustomer.Text = "Edit";
             btnEditCustomer.UseVisualStyleBackColor = true;
             btnEditCustomer.Click += btnEditCustomer_Click;
@@ -73,7 +73,7 @@
             btnDeleteCustomer.Location = new Point(328, 41);
             btnDeleteCustomer.Name = "btnDeleteCustomer";
             btnDeleteCustomer.Size = new Size(123, 40);
-            btnDeleteCustomer.TabIndex = 2;
+            btnDeleteCustomer.TabIndex = 6;
             btnDeleteCustomer.Text = "Delete";
             btnDeleteCustomer.UseVisualStyleBackColor = true;
             btnDeleteCustomer.Click += btnDeleteCustomer_Click;
@@ -84,7 +84,7 @@
             btnAddNewCustomer.Location = new Point(21, 41);
             btnAddNewCustomer.Name = "btnAddNewCustomer";
             btnAddNewCustomer.Size = new Size(123, 40);
-            btnAddNewCustomer.TabIndex = 2;
+            btnAddNewCustomer.TabIndex = 4;
             btnAddNewCustomer.Text = "Add New";
             btnAddNewCustomer.UseVisualStyleBackColor = true;
             btnAddNewCustomer.Click += btnAddNewCustomer_Click;
@@ -109,7 +109,7 @@
             btnResetFilter.Location = new Point(634, 83);
             btnResetFilter.Name = "btnResetFilter";
             btnResetFilter.Size = new Size(123, 40);
-            btnResetFilter.TabIndex = 2;
+            btnResetFilter.TabIndex = 3;
             btnResetFilter.Text = "Reset";
             btnResetFilter.UseVisualStyleBackColor = true;
             // 
@@ -129,7 +129,7 @@
             txtSearchKey.Location = new Point(94, 30);
             txtSearchKey.Name = "txtSearchKey";
             txtSearchKey.Size = new Size(211, 29);
-            txtSearchKey.TabIndex = 4;
+            txtSearchKey.TabIndex = 1;
             txtSearchKey.KeyPress += txtSearchKey_KeyPress_1;
             // 
             // lblSearchKey

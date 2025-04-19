@@ -72,7 +72,7 @@
             btnSave.Location = new Point(359, 477);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(140, 47);
-            btnSave.TabIndex = 4;
+            btnSave.TabIndex = 6;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             // 
@@ -82,7 +82,7 @@
             btnCancel.Location = new Point(190, 477);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(140, 47);
-            btnCancel.TabIndex = 4;
+            btnCancel.TabIndex = 7;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -142,7 +142,7 @@
             txtPhoneNumber.Margin = new Padding(4);
             txtPhoneNumber.Name = "txtPhoneNumber";
             txtPhoneNumber.Size = new Size(323, 29);
-            txtPhoneNumber.TabIndex = 1;
+            txtPhoneNumber.TabIndex = 5;
             // 
             // txtCity
             // 
@@ -150,7 +150,7 @@
             txtCity.Margin = new Padding(4);
             txtCity.Name = "txtCity";
             txtCity.Size = new Size(323, 29);
-            txtCity.TabIndex = 1;
+            txtCity.TabIndex = 4;
             // 
             // txtAddressLineTwo
             // 
@@ -158,7 +158,7 @@
             txtAddressLineTwo.Margin = new Padding(4);
             txtAddressLineTwo.Name = "txtAddressLineTwo";
             txtAddressLineTwo.Size = new Size(323, 29);
-            txtAddressLineTwo.TabIndex = 1;
+            txtAddressLineTwo.TabIndex = 3;
             // 
             // txtAddressLineOne
             // 
@@ -166,7 +166,7 @@
             txtAddressLineOne.Margin = new Padding(4);
             txtAddressLineOne.Name = "txtAddressLineOne";
             txtAddressLineOne.Size = new Size(323, 29);
-            txtAddressLineOne.TabIndex = 1;
+            txtAddressLineOne.TabIndex = 2;
             // 
             // txtFullName
             // 
